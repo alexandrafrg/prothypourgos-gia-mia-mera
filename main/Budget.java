@@ -1,3 +1,4 @@
+package main;
 public class Budget {
     public double education = 5000;
     public double health = 8000;
