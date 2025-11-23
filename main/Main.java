@@ -17,7 +17,7 @@ public class Main {
             System.out.println("1. Προβολή προϋπολογισμού");
             System.out.println("2. Εισαγωγή αλλαγής");
             System.out.println("3. Προβολή αλλαγών");
-            System.out.println("4. Έλεγχος ισοζυγίου & περιορισμών");
+            System.out.println("4. Υπολογισμός ισοζυγίου");
             System.out.println("5. Ανάλυση εσόδων/εξόδων (Top-3)");
             System.out.println("6. Σενάρια & μαζικές αλλαγές");
             System.out.println("7. Ειδοποιήσεις για αποκλίσεις");
