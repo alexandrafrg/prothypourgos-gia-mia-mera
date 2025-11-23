@@ -18,9 +18,9 @@ public class Main {
             System.out.println("2. Εισαγωγή αλλαγής");
             System.out.println("3. Προβολή αλλαγών");
             System.out.println("4. Υπολογισμός ισοζυγίου");
-            System.out.println("5. Ανάλυση εσόδων/εξόδων (Top-3)");
-            System.out.println("6. Σενάρια & μαζικές αλλαγές");
-            System.out.println("7. Ειδοποιήσεις για αποκλίσεις");
+            System.out.println("5. Ανάλυση εσόδων/εξόδων ανά υπουργείο");
+            System.out.println("6. Εμφάνιση Top-3 κατηγοριών εσόδων/εξόδων");
+            System.out.println("7. Εκτέλεση σεναρίων");
             System.out.println("0. Έξοδος");
             System.out.print("Επιλογή: ");
  
