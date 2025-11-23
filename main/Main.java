@@ -37,23 +37,23 @@ public class Main {
                     break;
 
                 case 3:
-                    manager.displayChanges(); 
+                    manager.displayChanges();
                     break;
 
                 case 4:
-                    manager.checkBalanceAndConstraints(); 
+                    manager.calculateBalance(); 
                     break;
 
                 case 5:
-                    manager.showTopCategories(); 
+                    manager.analyzeMinistryBudget(); 
                     break;
 
                 case 6:
-                    manager.applyScenario(input); 
+                    manager.showTopBudgetCategories(input); 
                     break;
 
                 case 7:
-                    manager.showDeviationAlerts(); 
+                    manager.executeScenario(); 
                     break;
 
                 case 0:
