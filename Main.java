@@ -63,8 +63,6 @@ public class Main {
                 default:
                     System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά!");
             }
-
-        }
         //τελος καινουριου
 
 
