@@ -18,6 +18,7 @@ public class BudgetManager {
         System.out.println("Ισοζύγιο: " + (budget.getRevenue() - budget.getExpenses())); //Υπολογίζει και δείχνει έσοδα-έξοδα (τελικό αποτέλεσμα)
         System.out.println();
     }
+<<<<<<< HEAD
 
     // Λειτουργία αλλαγής ποσού
     public void modifyBudget(Scanner input) {
@@ -65,6 +66,9 @@ public class BudgetManager {
     }
 
     //εισαγωγη αλαγης ΝΕΦΕΛΗ
+=======
+    //εισαγωγή αλλαγών
+>>>>>>> 5564b0a8905260a34fed8832305c35b5d7e850f5
     public void modifyBudget(Scanner input) {
         System.out.println("Εισαγωγή Αλλαγής");
         for (int i = 0; i < budget.ministries.length; i++) {
@@ -106,7 +110,7 @@ public class BudgetManager {
             System.out.println("Ενημερώθηκαν τα ΕΞΟΔΑ του: " + budget.ministries[index]);
         }
         System.out.println("Αλλαγή: " + oldValue + " → " + newAmount);
-        System.out.println("Η αλλαγήκαταχωρήθηκε!");
+        System.out.println("Η αλλαγή καταχωρήθηκε!");
     }  
     //τελος
 
@@ -352,6 +356,7 @@ public class BudgetManager {
 
     //ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγώ
     //Θα υλοποιηθεί σε επόμενη φάση , όχι ακόμα
+<<<<<<< HEAD
 }
 //Η 4η επιλογή - Υπολογισμός Ισοζυγίου
 public double calculateBalance(Budget b) {
@@ -495,3 +500,6 @@ public class BudgetManager {
         }
     }
 }
+=======
+}
+>>>>>>> 5564b0a8905260a34fed8832305c35b5d7e850f5
