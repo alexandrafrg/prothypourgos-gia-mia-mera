@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class BudgetManager {
 
-    //ΚΩΝΝΑ - μη τα σβήσετε
     private Budget budget; 
     private StringBuilder changesLog = new StringBuilder();    //καταγραφή αλλαγών
 
@@ -10,7 +9,7 @@ public class BudgetManager {
         this.budget = budget;
     }
 
-    // Προβολή τρέχοντος προϋπολογισμού - ΚΩΝΝΑ
+    // Προβολή τρέχοντος προϋπολογισμού 
     public void displayBudget() {
         System.out.println("\n----- ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ -----");
         System.out.println("Έσοδα: " + budget.getRevenue()); 
@@ -64,7 +63,7 @@ public class BudgetManager {
         System.out.println("Η αλλαγή καταχωρήθηκε!\n");
     }
 
-    // Προβολή αλλαγών - ΚΩΝΝΑ
+    // Προβολή αλλαγών 
     public void displayChanges() {
         if (changesLog.isEmpty()) {
             System.out.println("\nΔεν έχουν γίνει αλλαγές.\n");
@@ -74,7 +73,7 @@ public class BudgetManager {
         }
     }
 
-    //Η 7Η ΕΠΙΛΟΓΗ του μενού - ΑΛΕΞ
+    //Η 7Η ΕΠΙΛΟΓΗ του μενού 
     //Μέθοδος που εκτελεί υποθετικά σενάρια και υπολογίζει τις επιπτώσεις τους
     public void executeScenario() {
 
