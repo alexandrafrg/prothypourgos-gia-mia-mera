@@ -66,9 +66,11 @@ public class BudgetManager {
     //τελος
 
     // Προβολή αλλαγών
+    public void displayChanges() {
         if (changesLog.isEmpty()) {
             System.out.println("\nΔεν έχουν γίνει αλλαγές.\n");
         } else {
+            System.out.println("\n----- ΚΑΤΑΓΡΑΦΗ ΑΛΛΑΓΩΝ -----");
             System.out.println(changesLog.toString());
         }
     }
@@ -182,7 +184,7 @@ public class BudgetManager {
 
         System.out.println("===== ΣΕΝΑΡΙΑ ΔΑΠΑΝΩΝ =====");
         System.out.println("1. Μισθοί δημοσίου");
-        System.out.println("2. Συντάξεις / κοινωνικές παροχές")
+        System.out.println("2. Συντάξεις / κοινωνικές παροχές");
         System.out.println("3. Λειτουργικά έξοδα (αγορές αγαθών/υπηρεσιών)");
         System.out.println("4. Μεταβιβάσεις");
         System.out.println("5. Επιδοτήσεις");
@@ -250,7 +252,7 @@ public class BudgetManager {
                 break;
                 
             case 0:
-                eturn;
+                return;
             
             default:
                 System.out.println("Μη έγκυρη επιλογή.");
