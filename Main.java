@@ -61,7 +61,7 @@ public class Main {
                     break;
 
                 default:
-                    System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά!");
+                    System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά! Από 0 έως 7.");
             }
         //τελος καινουριου
 
