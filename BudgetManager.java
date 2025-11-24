@@ -326,10 +326,10 @@ public class BudgetManager {
         
     //ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγών
     //Θα υλοποιηθεί σε επόμενη φάση , όχι ακόμα
-<<<<<<< HEAD
-}
+
+
 //Η 4η επιλογή - Υπολογισμός Ισοζυγίου
-public double calculateBalance(Budget b) {
+    public double calculateBalance(Budget b) {
 
     double totalRevenue = b.totalRevenue;
 
@@ -365,8 +365,6 @@ public double calculateBalance(Budget b) {
 }
 //ΤΕΛΟΣ 4ΗΣ ΕΠΙΛΟΓΗΣ
 //ΜΥΡΤΩ
-public class BudgetManager {
-
     private Budget budget;
 
     public BudgetManager(Budget budget) {
