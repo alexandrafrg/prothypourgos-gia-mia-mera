@@ -55,14 +55,15 @@ public class BudgetManager {
             budget.totalRevenue += newAmount;
             budget.ministryRevenue[index] = newAmount;
             System.out.println("Ενημερώθηκαν τα ΕΣΟΔΑ του: " + budget.ministries[index]);
-        }
-        else {
+        } else {
             oldValue = budget.ministryExpenses[index];
             budget.totalExpenditure -= oldValue;
             budget.totalExpenditure += newAmount;
             budget.ministryExpenses[index] = newAmount;
             System.out.println("Ενημερώθηκαν τα ΕΞΟΔΑ του: " + budget.ministries[index]);
         }
+        changesLog.append("[" + budget.ministries[index] + "] " 
+            + oldValue + " → " + newAmount + "\n");
         System.out.println("Αλλαγή: " + oldValue + " → " + newAmount);
         System.out.println("Η αλλαγή καταχωρήθηκε!");
     }  
@@ -74,7 +75,6 @@ public class BudgetManager {
         if (changesLog.isEmpty()) {
             System.out.println("\nΔεν έχουν γίνει αλλαγές.\n");
         } else {
-            System.out.println("\n----- ΑΛΛΑΓΕΣ -----");
             System.out.println(changesLog.toString());
         }
     }
