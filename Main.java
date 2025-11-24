@@ -73,20 +73,5 @@ public class Main {
         input.close();
     }
 }
-public class Main {
-    public static void main(String[] args) {
-        Budget budget = new Budget();
-        BudgetManager manager = new BudgetManager(budget);
 
-        // ΑΝΑΛΥΣΗ ΑΝΑ ΥΠΟΥΡΓΕΙΟ
-        manager.analyzeRevenuePerMinistry();
-        System.out.println();
-        manager.analyzeExpenditurePerMinistry();
-        System.out.println();
 
-        //TOP-3 ΚΑΤΗΓΟΡΙΕΣ
-        manager.showTop3RevenueCategories();
-        System.out.println();
-        manager.showTop3ExpenditureCategories();
-    }
-}
