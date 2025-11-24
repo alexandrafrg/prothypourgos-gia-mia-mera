@@ -62,6 +62,7 @@ public class BudgetManager {
 
         System.out.println("Η αλλαγή καταχωρήθηκε!\n");
     }
+    //εισαγωγή αλλαγών
     public void modifyBudget(Scanner input) {
         System.out.println("Εισαγωγή Αλλαγής");
         for (int i = 0; i < budget.ministries.length; i++) {
