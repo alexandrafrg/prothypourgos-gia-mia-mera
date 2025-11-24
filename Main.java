@@ -41,7 +41,7 @@ public class Main {
                     break;
 
                 case 4:
-                    manager.calculateBalance();
+                    manager.calculateBalance(); 
                     break;
 
                 case 5:
@@ -71,5 +71,22 @@ public class Main {
         } while (choice != 0);
 
         input.close();
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Budget budget = new Budget();
+        BudgetManager manager = new BudgetManager(budget);
+
+        // ΑΝΑΛΥΣΗ ΑΝΑ ΥΠΟΥΡΓΕΙΟ
+        manager.analyzeRevenuePerMinistry();
+        System.out.println();
+        manager.analyzeExpenditurePerMinistry();
+        System.out.println();
+
+        //TOP-3 ΚΑΤΗΓΟΡΙΕΣ
+        manager.showTop3RevenueCategories();
+        System.out.println();
+        manager.showTop3ExpenditureCategories();
     }
 }
