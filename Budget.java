@@ -35,7 +35,7 @@ public class Budget {
     public double loansExpenses54 = 1203165130000.0;        //Δάνεια
 
     //ΙΣΟΖΥΓΙΟ
-    public double result = -3080506000.0; //Έσοδα - Έξοδα
+    public double result = -3080506000.0; //Έσοδα - Έξοδα (αρχικό - πριν τις αλλαγές)
 
     //ΛΟΓΑΡΙΑΣΜΟΙ ΑΝΑ ΥΠΟΥΡΓΕΙΟ 
 
@@ -113,6 +113,15 @@ public class Budget {
         2285820000.0,
         1221116000.0
     };
-
+    public double getRevenue() {
+        return totalRevenue;
+    }
+    public double getExpenses() {
+        double sum = 0;
+        for (double expense : ministryExpenses) {
+            sum += expense;
+        }
+        return sum;
+    }
 }
 
