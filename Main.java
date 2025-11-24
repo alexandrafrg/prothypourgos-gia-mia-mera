@@ -41,7 +41,7 @@ public class Main {
                     break;
 
                 case 4:
-                    manager.calculateBalance(); 
+                    manager.calculateBalance(budget); 
                     break;
 
                 case 5:
