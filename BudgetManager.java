@@ -18,9 +18,6 @@ public class BudgetManager {
         System.out.println("Ισοζύγιο: " + (budget.getRevenue() - budget.getExpenses())); //Υπολογίζει και δείχνει έσοδα-έξοδα (τελικό αποτέλεσμα)
         System.out.println();
     }
-
-    //εισαγωγη αλαγης ΝΕΦΕΛΗ
-=======
     //εισαγωγή αλλαγών
 >>>>>>> 5564b0a8905260a34fed8832305c35b5d7e850f5
     public void modifyBudget(Scanner input) {
@@ -69,9 +66,7 @@ public class BudgetManager {
     }  
     //τελος
 
-    
     // Προβολή αλλαγών - ΚΩΝΝΑ
-    public void displayChanges() {
         if (changesLog.isEmpty()) {
             System.out.println("\nΔεν έχουν γίνει αλλαγές.\n");
         } else {
