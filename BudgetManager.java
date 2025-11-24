@@ -62,7 +62,51 @@ public class BudgetManager {
 
         System.out.println("Η αλλαγή καταχωρήθηκε!\n");
     }
-
+    public void modifyBudget(Scanner input) {
+        System.out.println("Εισαγωγή Αλλαγής");
+        for (int i = 0; i < budget.ministries.length; i++) {
+            System.out.println((i + 1) + ". " + budget.ministries[i]);
+        }
+        System.out.print("Διαλέξτε υπουργείο: ");
+        int index = input.nextInt() - 1;
+        if (index < 0 || index >= budget.ministries.length) {
+            System.out.println("Μη έγκυρη επιλογή!");
+            return;
+        }
+        System.out.println("1. Έσοδα");
+        System.out.println("2. Έξοδα");
+        System.out.print("Τι θέλετε να αλλάξετε; ");
+        int type = input.nextInt();
+        if (type != 1 && type != 2) {
+            System.out.println("Μη έγκυρη επιλογή!");
+            return;   
+        }
+        System.out.print("Δώσε νέο ποσό: ");
+        double newAmount = input.nextDouble();
+        if (newAmount < 0) {
+            System.out.println("Το ποσό δεν μπορεί να είναι αρνητικό!");
+            return;
+        }
+        double oldValue;
+        if (type == 1) {              
+            oldValue = budget.ministryRevenue[index];
+            budget.totalRevenue -= oldValue;
+            budget.totalRevenue += newAmount;
+            budget.ministryRevenue[index] = newAmount;
+            System.out.println("Ενημερώθηκαν τα ΕΣΟΔΑ του: " + budget.ministries[index]);
+        }
+        else {
+            oldValue = budget.ministryExpenses[index];
+            budget.totalExpenditure -= oldValue;
+            budget.totalExpenditure += newAmount;
+            budget.ministryExpenses[index] = newAmount;
+            System.out.println("Ενημερώθηκαν τα ΕΞΟΔΑ του: " + budget.ministries[index]);
+        }
+        System.out.println("Αλλαγή: " + oldValue + " → " + newAmount);
+        System.out.println("Η αλλαγήκαταχωρήθηκε!");
+    }  
+    //τελος
+ 
     // Προβολή αλλαγών 
     public void displayChanges() {
         if (changesLog.isEmpty()) {
