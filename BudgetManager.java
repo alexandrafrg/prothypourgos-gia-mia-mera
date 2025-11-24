@@ -265,41 +265,60 @@ public class BudgetManager {
 
         System.out.println("===== ΑΛΛΑΓΕΣ ΑΝΑ ΥΠΟΥΡΓΕΙΟ =====");
         
-        int i = 1;
+         // 1. Εμφάνιση όλων των υπουργείων
+    for (int i = 0; i < budget.ministries.length; i++) {
+        System.out.println((i + 1) + ". " + budget.ministries[i]);
+    }
+
+    // 2. Επιλογή υπουργείου
+    System.out.print("Επιλέξτε υπουργείο: ");
+    int choice = scanner.nextInt() - 1;   // κάνουμε -1 για index πίνακα
+
+    if (choice < 0 || choice >= budget.ministries.length) {
+        System.out.println("Μη έγκυρη επιλογή.");
+        return;
+    }
+
+    // 3. Επιλογή τύπου αλλαγής
+    System.out.println("Τι θέλετε να αλλάξετε;");
+    System.out.println("1. Έσοδα υπουργείου");
+    System.out.println("2. Έξοδα υπουργείου");
+    System.out.print("Επιλογή: ");
+    int type = scanner.nextInt();
+
+    // 4. Ποσοστό μεταβολής
+    System.out.print("Ποσοστό μεταβολής (%): ");
+    double percent = scanner.nextDouble();
+
+    // 5. Ανάλογα με τον τύπο, αλλάζουμε έσοδα ή έξοδα
+    if (type == 1) {
         
-        for (String ministry : budget.getMinistryBudget().keySet()) {
-        System.out.println(i + ". " + ministry);
-        i++;
-        
-        }
-        
-        System.out.print("Επίλεξε υπουργείο: ");
-        int choice = scanner.nextInt();
-        
-        String selectedMinistry = "";
-        int counter = 1;
-        
-        for (String ministry : budget.getMinistryBudget().keySet()) {
-            
-            if (counter == choice) {
-                selectedMinistry = ministry;
-            break;
-        }
-        
-        counter++
-        
-        }
-        
-        System.out.print("Ποσοστό μεταβολής (%): ");
-        double percent = scanner.nextDouble();
-        
-        double oldVal = budget.getMinistryBudget().get(selectedMinistry);
+        double oldVal = budget.ministryRevenue[choice];
         double newVal = oldVal * (1 + percent / 100.0);
-        
-        budget.updateMinistryAmount(selectedMinistry, newVal);
-        
-        System.out.println("Το υπουργείο '" + selectedMinistry + "' ενημερώθηκε.");
-        System.out.println("Πριν: " + oldVal + " €  →  Μετά: " + newVal + " €");
+
+        budget.ministryRevenue[choice] = newVal;
+
+        System.out.println("\n--- Αλλαγή ΕΣΟΔΩΝ ---");
+        System.out.println("Υπουργείο: " + budget.ministries[choice]);
+        System.out.println("Πριν: " + oldVal + " €");
+        System.out.println("Μετά: " + newVal + " €");
+
+    } else if (type == 2) {
+
+        double oldVal = budget.ministryExpenses[choice];
+        double newVal = oldVal * (1 + percent / 100.0);
+
+        budget.ministryExpenses[choice] = newVal;
+
+        System.out.println("\n--- Αλλαγή ΕΞΟΔΩΝ ---");
+        System.out.println("Υπουργείο: " + budget.ministries[choice]);
+        System.out.println("Πριν: " + oldVal + " €");
+        System.out.println("Μετά: " + newVal + " €");
+
+    } else {
+        System.out.println("Μη έγκυρη επιλογή.");
+    }
+}
 
     }
 
