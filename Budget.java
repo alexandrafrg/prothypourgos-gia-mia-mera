@@ -113,6 +113,12 @@ public class Budget {
         2285820000.0,
         1221116000.0
     };
+    public int compensationEmployees;
+    public int useGoodsServices;
+    public int otherCurrentExpenses;
+    public int fixedAssets;
+    public int capitalTransfers;
+    public int loans;
     public double getRevenue() {
         return totalRevenue;
     }

@@ -306,3 +306,39 @@ public class BudgetManager {
     //ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγώ
     //Θα υλοποιηθεί σε επόμενη φάση , όχι ακόμα
 }
+//Η 4η επιλογή - Υπολογισμός Ισοζυγίου
+public double calculateBalance(Budget b) {
+
+    double totalRevenue = b.totalRevenue;
+
+    // Άθροισμα όλων των εξόδων του Budget
+    double totalExpenses =
+            b.compensationEmployees +
+            b.useGoodsServices +
+            b.interestPayments +
+            b.subsidies +
+            b.socialBenefits +
+            b.otherCurrentExpenses +
+            b.fixedAssets +
+            b.capitalTransfers +
+            b.loans +
+            b.equityShares +
+            b.depositsLiabilities;
+
+    double balance = totalRevenue - totalExpenses;
+
+    System.out.println("===== ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ =====");
+    System.out.println("Συνολικά Έσοδα: " + totalRevenue);
+    System.out.println("Συνολικές Δαπάνες: " + totalExpenses);
+
+    if (balance > 0) {
+        System.out.println("Πλεόνασμα: " + balance);
+    } else if (balance < 0) {
+        System.out.println("Έλλειμμα: " + balance);
+    } else {
+        System.out.println("Το ισοζύγιο είναι μηδενικό.");
+    }
+
+    return balance;
+}
+//ΤΕΛΟΣ 4ΗΣ ΕΠΙΛΟΓΗΣ
