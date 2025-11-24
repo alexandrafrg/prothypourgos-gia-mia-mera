@@ -2,21 +2,21 @@ import java.util.Scanner;
 
 public class BudgetManager {
 
-    private Budget budget;      // το αντικείμενο με τα ποσά
-    private String changesLog = "";  // ιστορικό αλλαγών
+    //ΚΩΝΝΑ - μη τα σβήσετε
+    private Budget budget; 
+    private StringBuilder changesLog = new StringBuilder();    //καταγραφή αλλαγών
 
     public BudgetManager(Budget budget) {
         this.budget = budget;
     }
 
-    // Προβολή τρέχοντος προϋπολογισμού
+    // Προβολή τρέχοντος προϋπολογισμού - ΚΩΝΝΑ
     public void displayBudget() {
-        System.out.println("\n----- ΤΡΕΧΩΝ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ -----");
-        System.out.println("1. Παιδεία: " + budget.education);
-        System.out.println("2. Υγεία: " + budget.health);
-        System.out.println("3. Άμυνα: " + budget.defense);
-        System.out.println("4. Μεταφορές: " + budget.transport);
-        System.out.println("---------------------------------\n");
+        System.out.println("\n----- ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ -----");
+        System.out.println("Έσοδα: " + budget.getRevenue()); 
+        System.out.println("Έξοδα: " + budget.getExpenses());
+        System.out.println("Ισοζύγιο: " + (budget.getRevenue() - budget.getExpenses())); //Υπολογίζει και δείχνει έσοδα-έξοδα (τελικό αποτέλεσμα)
+        System.out.println();
     }
 
     // Λειτουργία αλλαγής ποσού
@@ -64,13 +64,13 @@ public class BudgetManager {
         System.out.println("Η αλλαγή καταχωρήθηκε!\n");
     }
 
-    // Προβολή όλων των αλλαγών
+    // Προβολή αλλαγών - ΚΩΝΝΑ
     public void displayChanges() {
         if (changesLog.isEmpty()) {
             System.out.println("\nΔεν έχουν γίνει αλλαγές.\n");
         } else {
             System.out.println("\n----- ΑΛΛΑΓΕΣ -----");
-            System.out.println(changesLog);
+            System.out.println(changesLog.toString());
         }
     }
 }
