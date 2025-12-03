@@ -1,4 +1,4 @@
-package main;
+
 public class Budget {
     //ΕΣΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
     public double totalRevenue = 1304827000000.0; // Σύνολο Εσόδων
