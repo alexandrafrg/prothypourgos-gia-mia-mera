@@ -76,6 +76,17 @@ public class BudgetManager {
         }
     }
 
+// 4. ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ
+    public void calculateBalance() {
+        System.out.println("\n===== ΙΣΟΖΥΓΙΟ =====");
 
+        double revenue = budget.getRevenue();
+        double expenses = budget.getExpenses();
+        double balance = revenue - expenses;
+
+        System.out.println("Έσοδα: " + revenue);
+        System.out.println("Έξοδα: " + expenses);
+        System.out.println("Ισοζύγιο: " + balance);
+    }
 }
  
