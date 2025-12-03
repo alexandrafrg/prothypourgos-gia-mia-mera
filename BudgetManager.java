@@ -86,6 +86,8 @@ public class BudgetManager {
         System.out.println("Έξοδα: " + expenses);
         System.out.println("Ισοζύγιο: " + balance);
     }
+    
+    
     // 5. ΑΝΑΛΥΣΗ ΕΣΟΔΩΝ/ΕΞΟΔΩΝ ΑΝΑ ΥΠΟΥΡΓΕΙΟ
     public void analyzeMinistryBudget() {
 
@@ -107,6 +109,25 @@ public class BudgetManager {
                 System.out.println("Έλλειμμα: " + diff);
             }
         }
-    }   
+    }
+
+    // 6. TOP-3 ΚΑΤΗΓΟΡΙΕΣ ΕΣΟΔΩΝ/ΕΞΟΔΩΝ
+    public void showTopBudgetCategories(Scanner input) {
+
+        System.out.println("\n1. Top-3 Υπουργεία με τα υψηλότερα έσοδα");
+        System.out.println("2. Top-3 Υπουργεία με τα υψηλότερα έξοδα");
+        System.out.print("Επιλογή: ");
+        int choice = input.nextInt();
+
+        if (choice == 1) {
+            System.out.println("\n===== TOP-3 ΕΣΟΔΑ =====");
+            showTop3(budget.ministries, budget.ministryRevenue);
+        } else if (choice == 2) {
+            System.out.println("\n===== TOP-3 ΕΞΟΔΑ =====");
+            showTop3(budget.ministries, budget.ministryExpenses);
+        } else {
+            System.out.println("Μη έγκυρη επιλογή.");
+        }
+    }
 }
  
