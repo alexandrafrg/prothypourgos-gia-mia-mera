@@ -46,7 +46,7 @@ public class Main {
 
                 default -> System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά! Από 0 έως 7.");
             }
-        //τελος καινουριου
+        //τέλος καινουριου κομματιού
 
 
             System.out.println(); 
@@ -55,7 +55,7 @@ public class Main {
 
         input.close();
     }
+    
 }
-
 
 
