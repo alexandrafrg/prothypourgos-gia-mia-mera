@@ -146,5 +146,25 @@ public class BudgetManager {
             if (arr[i] == value) return i;
         return -1;
     }
+    // 7. ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
+    public void executeScenario() {
+
+        System.out.println("\n===== ΣΕΝΑΡΙΑ =====");
+
+        double originalExpenses = budget.getExpenses();
+
+        double cut10 = originalExpenses * 0.90;
+        double increase5 = originalExpenses * 1.05;
+
+        System.out.println("Αρχικά έξοδα: " + originalExpenses);
+        System.out.println("Σενάριο 1: Μείωση 10% → " + cut10);
+        System.out.println("Σενάριο 2: Αύξηση 5% → " + increase5);
+        System.out.println("Σενάριο 3: Ισομερής μείωση 5% σε όλα τα υπουργεία: ");
+
+        for (int i = 0; i < budget.ministryExpenses.length; i++) {
+            System.out.println(budget.ministries[i] + " → "
+                    + (budget.ministryExpenses[i] * 0.95));
+        }
+    }
 }
  
