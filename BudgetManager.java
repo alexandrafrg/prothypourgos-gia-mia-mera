@@ -24,9 +24,7 @@ public class BudgetManager {
                     "\n   Έξοδα: " + budget.ministryExpenses[i] + "\n");
         }
     }
-    
-    
-    // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
+     // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
     public void modifyBudget(Scanner input) {
 
         System.out.println("\n===== ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ =====");
@@ -76,7 +74,7 @@ public class BudgetManager {
         }
     }
 
-// 4. ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ
+    // 4. ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ
     public void calculateBalance() {
         System.out.println("\n===== ΙΣΟΖΥΓΙΟ =====");
 
@@ -88,5 +86,27 @@ public class BudgetManager {
         System.out.println("Έξοδα: " + expenses);
         System.out.println("Ισοζύγιο: " + balance);
     }
+    // 5. ΑΝΑΛΥΣΗ ΕΣΟΔΩΝ/ΕΞΟΔΩΝ ΑΝΑ ΥΠΟΥΡΓΕΙΟ
+    public void analyzeMinistryBudget() {
+
+        System.out.println("\n===== ΑΝΑΛΥΣΗ ΑΝΑ ΥΠΟΥΡΓΕΙΟ =====");
+
+        for (int i = 0; i < budget.ministries.length; i++) {
+
+            double rev = budget.ministryRevenue[i];
+            double exp = budget.ministryExpenses[i];
+            double diff = rev - exp;
+
+            System.out.println("\n" + budget.ministries[i]);
+            System.out.println("Έσοδα: " + rev);
+            System.out.println("Έξοδα: " + exp);
+
+            if (diff >= 0) {
+                System.out.println("Πλεόνασμα: " + diff);
+            } else {
+                System.out.println("Έλλειμμα: " + diff);
+            }
+        }
+    }   
 }
  
