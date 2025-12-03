@@ -128,6 +128,23 @@ public class BudgetManager {
         } else {
             System.out.println("Μη έγκυρη επιλογή.");
         }
+    }private void showTop3(String[] names, double[] values) {
+
+        double[] sorted = Arrays.copyOf(values, values.length);
+        Arrays.sort(sorted);
+
+        for (int i = sorted.length - 1; i >= sorted.length - 3; i--) {
+            double value = sorted[i];
+            int indexOriginal = findIndex(values, value);
+
+            System.out.println(names[indexOriginal] + " → " + value);
+        }
+    }
+
+    private int findIndex(double[] arr, double value) {
+        for (int i = 0; i < arr.length; i++)
+            if (arr[i] == value) return i;
+        return -1;
     }
 }
  
