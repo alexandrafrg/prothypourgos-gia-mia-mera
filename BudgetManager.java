@@ -23,6 +23,44 @@ public class BudgetManager {
                     "\n   Έσοδα: " + budget.ministryRevenue[i] +
                     "\n   Έξοδα: " + budget.ministryExpenses[i] + "\n");
         }
+    }
+     // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
+    public void modifyBudget(Scanner input) {
+
+        System.out.println("\n===== ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ =====");
+
+        for (int i = 0; i < budget.ministries.length; i++) {
+            System.out.println((i + 1) + ". " + budget.ministries[i] +
+                    " (Τρέχον: " + budget.ministryExpenses[i] + ")");
+        }
+
+        System.out.print("Διάλεξε υπουργείο: ");
+        int index = input.nextInt() - 1;
+
+        if (index < 0 || index >= budget.ministries.length) {
+            System.out.println("Μη έγκυρη επιλογή.");
+            return;
+        }
+
+        double oldValue = budget.ministryExpenses[index];
+
+        System.out.print("Νέα τιμή εξόδων: ");
+        input.nextLine(); // καθαρισμός buffer
+        double newValue = Double.parseDouble(input.nextLine());
+
+
+        if (newValue < 0) {
+            System.out.println("Το ποσό δεν μπορεί να είναι αρνητικό.");
+            return;
+        }
+
+        budget.ministryExpenses[index] = newValue;
+
+        // Καταγραφή αλλαγής
+        changesLog.append("[" + budget.ministries[index] + "] "
+                + oldValue + " → " + newValue + "\n");
+
+        System.out.println("Η αλλαγή αποθηκεύτηκε!");
     } 
 }
  
