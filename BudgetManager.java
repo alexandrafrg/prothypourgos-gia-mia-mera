@@ -24,7 +24,9 @@ public class BudgetManager {
                     "\n   Έξοδα: " + budget.ministryExpenses[i] + "\n");
         }
     }
-     // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
+    
+    
+    // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
     public void modifyBudget(Scanner input) {
 
         System.out.println("\n===== ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ =====");
@@ -62,5 +64,18 @@ public class BudgetManager {
 
         System.out.println("Η αλλαγή αποθηκεύτηκε!");
     } 
+
+    // 3. ΠΡΟΒΟΛΗ ΟΛΩΝ ΤΩΝ ΑΛΛΑΓΩΝ
+    public void displayChanges() {
+        System.out.println("\n===== ΠΡΟΒΟΛΗ ΑΛΛΑΓΩΝ =====");
+
+        if (changesLog.length() == 0) {
+            System.out.println("Δεν έχουν γίνει αλλαγές ακόμα.");
+        } else {
+            System.out.println(changesLog.toString());
+        }
+    }
+
+
 }
  
