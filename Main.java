@@ -3,13 +3,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         
-        Scanner input = new Scanner(System.in);
-
         // Δημιουργία αντικειμένων
-        Budget budget = new Budget();
-        BudgetManager manager = new BudgetManager(budget);
-
-        int choice;
+        try (Scanner input = new Scanner(System.in)) {
+            // Δημιουργία αντικειμένων
+            Budget budget = new Budget();
+            BudgetManager manager = new BudgetManager(budget);
+            
+            int choice;
             
             //καινουριος κωδικας
         do {
@@ -28,40 +28,23 @@ public class Main {
             choice = input.nextInt();
 
             switch (choice) {
-                case 1:
-                    manager.displayBudget(); 
-                    break;
+                case 1 -> manager.displayBudget();
 
-                case 2:
-                    manager.modifyBudget(input); 
-                    break;
+                case 2 -> manager.modifyBudget(input);
 
-                case 3:
-                    manager.displayChanges();
-                    break;
+                case 3 -> manager.displayChanges();
 
-                case 4:
-                    manager.calculateBalance(); 
-                    break;
+                case 4 -> manager.calculateBalance();
 
-                case 5:
-                    manager.analyzeMinistryBudget(); 
-                    break;
+                case 5 -> manager.analyzeMinistryBudget();
 
-                case 6:
-                    manager.showTopBudgetCategories(input); 
-                    break;
+                case 6 -> manager.showTopBudgetCategories(input);
 
-                case 7:
-                    manager.executeScenario(); 
-                    break;
+                case 7 -> manager.executeScenario();
 
-                case 0:
-                    System.out.println("Έξοδος από το πρόγραμμα...");
-                    break;
+                case 0 -> System.out.println("Έξοδος από το πρόγραμμα...");
 
-                default:
-                    System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά! Από 0 έως 7.");
+                default -> System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά! Από 0 έως 7.");
             }
         //τελος καινουριου
 
