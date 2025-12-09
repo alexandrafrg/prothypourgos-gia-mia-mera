@@ -118,9 +118,11 @@ public class Budget {
     public int fixedAssets;
     public int capitalTransfers;
     public int loans;
+
     public double getRevenue() {
         return totalRevenue;
     }
+    
     public double getExpenses() {
         double sum = 0;
         for (double expense : ministryExpenses) {

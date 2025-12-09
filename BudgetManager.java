@@ -149,6 +149,8 @@ public class BudgetManager {
     // 7. ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
     public void executeScenario() {
 
+        //ΜΕΝΟΥ ΓΙΑ ΤΗΝ ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
+
             //ΜΕΡΟΣ 1ο της 7ης επιλογής - Σενάριο Αλλαγής Εσόδων 
     
     private void scenarioRevenue(Scanner scanner) { 
@@ -357,6 +359,65 @@ public class BudgetManager {
     }
 
     //ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγών
+
+    private void scenaioCombined(Scanner scanner) {
+
+        System.out.println("===== ΤΑΥΤΟΧΡΟΝΕΣ ΑΛΛΑΓΕΣ =====");
+
+        //Αποθήκευση αρχικών τιμών προυπολογισμού (πριν εκτελεστεί το σενάριο)
+        double initialRevenue = budget.getRevenue();
+        double initialExpenses = budget.getExpenses();
+        double initialBalance = initialRevenue - initialExpenses;
+        
+        boolean done = false;
+
+        //Το σενάριο αρχίζει να εκτελείται
+
+        while (!done) {
+            System.out.println("\n--- Επιλέξτε τι θέλετε να αλλάξετε ---");
+            System.out.println("1. Αλλαγές στα ΕΣΟΔΑ (φόροι, εισφορές κ.λπ.)");
+            System.out.println("2. Αλλαγές στις ΔΑΠΑΝΕΣ (μισθοί, συντάξεις κ.λπ.)");
+            System.out.println("3. Αλλαγές ανά ΥΠΟΥΡΓΕΙΟ (έσοδα/έξοδα υπουργείου)");
+            System.out.println("0. Τέλος σεναρίου & εμφάνιση αποτελεσμάτων");
+            System.out.print("Επιλογή: ");
+
+            int choice = scanner.nextInt(); //Σε κάθε επανάληψη ο χρήστης επιλέγει τι είδους αλλαγή θέλει να κάνει
+
+            switch (choice) {
+                case 1:
+                    scenarioRevenue(scanner);       //Χρησιμοποιείται η μέθοδος που έχει γραφεί ήδη παραπάνω
+                    break;
+                case 2:
+                    scenarioExpenditure(scanner);   // Το ίδιο και εδώ
+                    break;
+                case 3:
+                    scenarioMinistries(scanner);    // Το ίδιο και εδώ
+                    break;
+                case 0:
+                    done = true;
+                    break;
+                default:
+                    System.out.println("Μη έγκυρη επιλογή.");
+        }
+    }
+
+        //Τιμές μετά το σενάριο
+        double finalRevenue = budget.getRevenue();
+        double finalExpenses = budget.getExpenses();
+        double finalBalance = finalRevenue - finalExpenses;
+
+        //Σύνοψη αποτελεσμάτων
+        System.out.println("\n===== ΠΕΡΙΛΗΨΗ ΣΕΝΑΡΙΟΥ ΤΑΥΤΟΧΡΟΝΩΝ ΑΛΛΑΓΩΝ =====");
+        System.out.println("Αρχικά έσοδα : " + initialRevenue);
+        System.out.println("Αρχικά έξοδα : " + initialExpenses);
+        System.out.println("Αρχικό ισοζύγιο : " + initialBalance);
+        System.out.println("----------------------------------------");
+        System.out.println("Τελικά έσοδα : " + finalRevenue);
+        System.out.println("Τελικά έξοδα : " + finalExpenses);
+        System.out.println("Τελικό ισοζύγιο : " + finalBalance);
+        System.out.println("----------------------------------------");
+        System.out.println("Μεταβολή ισοζυγίου : " + (finalBalance - initialBalance));
+    }
 
 }
  
