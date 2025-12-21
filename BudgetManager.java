@@ -287,7 +287,7 @@ public class BudgetManager {
                 break;
                 
             case 0:
-                eturn;
+                return;
             
             default:
                 System.out.println("Μη έγκυρη επιλογή.");
