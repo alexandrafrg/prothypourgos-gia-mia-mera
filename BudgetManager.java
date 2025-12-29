@@ -24,7 +24,8 @@ public class BudgetManager {
                     "\n   Έξοδα: " + budget.ministryExpenses[i] + "\n");
         }
     }
-     // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
+
+    // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
     public void modifyBudget(Scanner input) {
 
         System.out.println("\n===== ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ =====");
@@ -48,7 +49,6 @@ public class BudgetManager {
         input.nextLine(); // καθαρισμός buffer
         double newValue = Double.parseDouble(input.nextLine());
 
-
         if (newValue < 0) {
             System.out.println("Το ποσό δεν μπορεί να είναι αρνητικό.");
             return;
@@ -61,7 +61,7 @@ public class BudgetManager {
                 + oldValue + " → " + newValue + "\n");
 
         System.out.println("Η αλλαγή αποθηκεύτηκε!");
-    } 
+    }
 
     // 3. ΠΡΟΒΟΛΗ ΟΛΩΝ ΤΩΝ ΑΛΛΑΓΩΝ
     public void displayChanges() {
@@ -88,8 +88,7 @@ public class BudgetManager {
 
         return balance;
     }
-    
-    
+
     // 5. ΑΝΑΛΥΣΗ ΕΣΟΔΩΝ/ΕΞΟΔΩΝ ΑΝΑ ΥΠΟΥΡΓΕΙΟ
     public void analyzeMinistryBudget() {
 
@@ -130,7 +129,9 @@ public class BudgetManager {
         } else {
             System.out.println("Μη έγκυρη επιλογή.");
         }
-    }private void showTop3(String[] names, double[] values) {
+    }
+
+    private void showTop3(String[] names, double[] values) {
 
         double[] sorted = Arrays.copyOf(values, values.length);
         Arrays.sort(sorted);
@@ -145,7 +146,8 @@ public class BudgetManager {
 
     private int findIndex(double[] arr, double value) {
         for (int i = 0; i < arr.length; i++)
-            if (arr[i] == value) return i;
+            if (arr[i] == value)
+                return i;
         return -1;
     }
     // 7. ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
@@ -356,24 +358,24 @@ public class BudgetManager {
     } else {
         System.out.println("Μη έγκυρη επιλογή.");
     }
-}
+
 
     }
 
-    //ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγών
+    // ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγών
 
     private void scenaioCombined(Scanner scanner) {
 
         System.out.println("===== ΤΑΥΤΟΧΡΟΝΕΣ ΑΛΛΑΓΕΣ =====");
 
-        //Αποθήκευση αρχικών τιμών προυπολογισμού (πριν εκτελεστεί το σενάριο)
+        // Αποθήκευση αρχικών τιμών προυπολογισμού (πριν εκτελεστεί το σενάριο)
         double initialRevenue = budget.getRevenue();
         double initialExpenses = budget.getExpenses();
         double initialBalance = initialRevenue - initialExpenses;
-        
+
         boolean done = false;
 
-        //Το σενάριο αρχίζει να εκτελείται
+        // Το σενάριο αρχίζει να εκτελείται
 
         while (!done) {
             System.out.println("\n--- Επιλέξτε τι θέλετε να αλλάξετε ---");
@@ -383,32 +385,32 @@ public class BudgetManager {
             System.out.println("0. Τέλος σεναρίου & εμφάνιση αποτελεσμάτων");
             System.out.print("Επιλογή: ");
 
-            int choice = scanner.nextInt(); //Σε κάθε επανάληψη ο χρήστης επιλέγει τι είδους αλλαγή θέλει να κάνει
+            int choice = scanner.nextInt(); // Σε κάθε επανάληψη ο χρήστης επιλέγει τι είδους αλλαγή θέλει να κάνει
 
             switch (choice) {
                 case 1:
-                    scenarioRevenue(scanner);       //Χρησιμοποιείται η μέθοδος που έχει γραφεί ήδη παραπάνω
+                    scenarioRevenue(scanner); // Χρησιμοποιείται η μέθοδος που έχει γραφεί ήδη παραπάνω
                     break;
                 case 2:
-                    scenarioExpenditure(scanner);   // Το ίδιο και εδώ
+                    scenarioExpenditure(scanner); // Το ίδιο και εδώ
                     break;
                 case 3:
-                    scenarioMinistries(scanner);    // Το ίδιο και εδώ
+                    scenarioMinistries(scanner); // Το ίδιο και εδώ
                     break;
                 case 0:
                     done = true;
                     break;
                 default:
                     System.out.println("Μη έγκυρη επιλογή.");
+            }
         }
-    }
 
-        //Τιμές μετά το σενάριο
+        // Τιμές μετά το σενάριο
         double finalRevenue = budget.getRevenue();
         double finalExpenses = budget.getExpenses();
         double finalBalance = finalRevenue - finalExpenses;
 
-        //Σύνοψη αποτελεσμάτων
+        // Σύνοψη αποτελεσμάτων
         System.out.println("\n===== ΠΕΡΙΛΗΨΗ ΣΕΝΑΡΙΟΥ ΤΑΥΤΟΧΡΟΝΩΝ ΑΛΛΑΓΩΝ =====");
         System.out.println("Αρχικά έσοδα : " + initialRevenue);
         System.out.println("Αρχικά έξοδα : " + initialExpenses);
@@ -422,4 +424,3 @@ public class BudgetManager {
     }
 
 }
- 
