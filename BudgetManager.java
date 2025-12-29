@@ -8,7 +8,7 @@ public class BudgetManager {
 
     public BudgetManager(Budget budget) {
         this.budget = budget;
-    }
+    } 
 
     // 1. ΠΡΟΒΟΛΗ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
     public void displayBudget() {
@@ -143,7 +143,8 @@ public class BudgetManager {
             System.out.println(names[indexOriginal] + " → " + value);
 
         }
-            
+    }
+
         private int findIndex(double[] arr, double value) {
                 for (int i = 0; i < arr.length; i++){
                     if (arr[i] == value){
@@ -153,13 +154,53 @@ public class BudgetManager {
                 return -1;
         }
 
-    }    
     // 7. ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
-    public void executeScenario() {
+    public void executeScenario(Scanner scanner) {
 
         //ΜΕΝΟΥ ΓΙΑ ΤΗΝ ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
 
-            //ΜΕΡΟΣ 1ο της 7ης επιλογής - Σενάριο Αλλαγής Εσόδων 
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("\n===== ΜΕΝΟΥ ΣΕΝΑΡΙΩΝ =====");
+            System.out.println("1. Σενάριο Αλλαγής Εσόδων");
+            System.out.println("2. Σενάριο Αλλαγής Δαπανών");
+            System.out.println("3. Σενάριο Αλλαγών σε Υπουργεία");
+            System.out.println("4. Σενάριο Ταυτόχρονων Αλλαγών");
+            System.out.println("0. Επιστροφή");
+            System.out.print("Επιλογή: ");
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    scenarioRevenue(scanner);
+                    break;
+
+                case 2:
+                    scenarioExpenditure(scanner);
+                    break;
+
+                case 3:
+                    scenarioMinistries(scanner);
+                    break;
+
+                case 4:
+                    scenarioCombined(scanner);
+                    break;
+
+                case 0:
+                    exit = true;
+                    break;
+
+                default:
+                    System.out.println("Μη έγκυρη επιλογή.");
+            }
+        }
+    }
+
+
+        //ΜΕΡΟΣ 1ο της 7ης επιλογής - Σενάριο Αλλαγής Εσόδων 
     
         private void scenarioRevenue(Scanner scanner) { 
         
@@ -369,7 +410,7 @@ public class BudgetManager {
 
             // ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγών
 
-        private void scenaioCombined(Scanner scanner) {
+        private void scenarioCombined(Scanner scanner) {
 
             System.out.println("===== ΤΑΥΤΟΧΡΟΝΕΣ ΑΛΛΑΓΕΣ =====");
 
@@ -428,4 +469,4 @@ public class BudgetManager {
             System.out.println("Μεταβολή ισοζυγίου : " + (finalBalance - initialBalance));
         }
     }
-}
+
