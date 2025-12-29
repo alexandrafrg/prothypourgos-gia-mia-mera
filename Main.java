@@ -49,7 +49,7 @@ public class Main {
                     manager.showTopBudgetCategories(input);
                     break;
                 case 7:
-                    manager.executeScenario();
+                    manager.executeScenario(input);
                     break;
                 case 0:
                     System.out.println("Έξοδος από το πρόγραμμα...");
