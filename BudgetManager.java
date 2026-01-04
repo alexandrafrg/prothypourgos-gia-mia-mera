@@ -250,8 +250,7 @@ public class BudgetManager {
         //ΜΕΡΟΣ 2ο της 7ης επιλογής - Σενάριο Αλλαγής Δαπανών
 
         private void scenarioExpenditure(Scanner scanner) {
-
-            System.out.println("===== ΣΕΝΑΡΙΑ ΔΑΠΑΝΩΝ =====");
+            System.out.println("\n===== ΣΕΝΑΡΙΑ ΔΑΠΑΝΩΝ =====");
             System.out.println("1. Μισθοί δημοσίου");
             System.out.println("2. Συντάξεις / κοινωνικές παροχές");
             System.out.println("3. Λειτουργικά έξοδα (αγορές αγαθών/υπηρεσιών)");
@@ -260,74 +259,55 @@ public class BudgetManager {
             System.out.println("6. Πιστώσεις υπό κατανομή");
             System.out.println("0. Επιστροφή");
             System.out.print("Επιλογή: ");
-        
+
             int c = scanner.nextInt();
-            double percent, oldVal, newVal;
-        
+            if (c == 0) return; // Επιστροφή στο προηγούμενο μενού
+
+            double oldVal = 0;
+            String label = "";
+
+            // 1. Ενοποίηση επιλογής κατηγορίας δαπάνης
             switch (c) {
-            
-                case 1:
-                    System.out.print("Μεταβολή μισθών δημοσίου (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.employeeCompensation;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.employeeCompensation = newVal;
-                    System.out.println("Νέοι μισθοί: " + newVal);
-                    break;
-                
-                case 2:
-                    System.out.print("Μεταβολή συντάξεων/παροχών (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.socialBenefits;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.socialBenefits = newVal;
-                    System.out.println("Νέες παροχές: " + newVal);
-                break;
-                
-                case 3:
-                    System.out.print("Μεταβολή λειτουργικών εξόδων (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.goodsServicesPurchases;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.goodsServicesPurchases = newVal;
-                    System.out.println("Νέα λειτουργικά έξοδα: " + newVal);
-                break;
-                
-                case 4:
-                    System.out.print("Μεταβολή μεταβιβάσεων (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.transfersExpenses;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.transfersExpenses = newVal;
-                    System.out.println("Νέες μεταβιβάσεις: " + newVal);
-                break;
-            
-                case 5:
-                    System.out.print("Μεταβολή επιδοτήσεων (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.subsidies;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.subsidies = newVal;
-                    System.out.println("Νέες επιδοτήσεις: " + newVal);
-                break;
-            
-                case 6:
-                    System.out.print("Μεταβολή πιστώσεων (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.allocatedCredits;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.allocatedCredits = newVal;
-                    System.out.println("Νέες πιστώσεις: " + newVal);
-                break;
-                
-                case 0:
-                    return;
-            
+                case 1: oldVal = budget.employeeCompensation; label = "Μισθών"; break;
+                case 2: oldVal = budget.socialBenefits; label = "Συντάξεων"; break;
+                case 3: oldVal = budget.goodsServicesPurchases; label = "Λειτουργικών"; break;
+                case 4: oldVal = budget.transfersExpenses; label = "Μεταβιβάσεων"; break;
+                case 5: oldVal = budget.subsidies; label = "Επιδοτήσεων"; break;
+                case 6: oldVal = budget.allocatedCredits; label = "Πιστώσεων"; break;
                 default:
                     System.out.println("Μη έγκυρη επιλογή.");
-                
+                    return;
+            }
+
+            // 2. Ενοποιημένη εισαγωγή ποσοστού
+            System.out.print("Ποσοστό μεταβολής (%): ");
+             percent = scanner.nextDouble();
+            double newVal = oldVal * (1 + percent / 100.0);
+
+            // 3. ΕΛΕΓΧΟΣ ΠΕΡΙΟΡΙΣΜΟΥ 
+            // Εξασφαλίζουμε ότι καμία δαπάνη δεν θα γίνει αρνητική
+            if (newVal < 0) {
+                System.out.println("Σφάλμα: Οι δαπάνες δεν μπορούν να έχουν αρνητική τιμή! Η πράξη ακυρώθηκε.");
+            } else {
+                // 4. Ενημέρωση του Budget
+                updateExpenditureField(c, newVal);
+                System.out.println("Επιτυχής αλλαγή! Νέα τιμή " + label + ": " + newVal + " €");
             }
         }
+
+        // Βοηθητική μέθοδος για την ανάθεση της τιμής στο σωστό πεδίο των δαπανών
+        private void updateExpenditureField(int choice, double value) {
+            switch (choice) {
+                case 1: budget.employeeCompensation = value; break;
+                case 2: budget.socialBenefits = value; break;
+                case 3: budget.goodsServicesPurchases = value; break;
+                case 4: budget.transfersExpenses = value; break;
+                case 5: budget.subsidies = value; break;
+                case 6: budget.allocatedCredits = value; break;
+            }
+        }
+        
+        
 
         //ΜΕΡΟΣ 3ο της 7ης επιλογής - Σενάριο Αλλαγής σε Υπουργεία
 
