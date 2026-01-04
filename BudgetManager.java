@@ -203,65 +203,49 @@ public class BudgetManager {
         //ΜΕΡΟΣ 1ο της 7ης επιλογής - Σενάριο Αλλαγής Εσόδων 
     
         private void scenarioRevenue(Scanner scanner) { 
-        
             System.out.println("===== ΣΕΝΑΡΙΑ ΕΣΟΔΩΝ =====");
-            System.out.println("1. Αλλαγή Φόρων");
-            System.out.println("2. Αλλαγή Κοινωνικών Εισφορών");
-            System.out.println("3. Αλλαγή Πωλήσεων αγαθών/υπηρεσιών");
-            System.out.println("4. Αλλαγή λοιπών τρεχόντων εσόδων");
-            System.out.println("0. Επιστροφή");
+            System.out.println("1. Αλλαγή Φόρων\n2. Αλλαγή Κοινωνικών Εισφορών\n3. Αλλαγή Πωλήσεων\n4. Αλλαγή λοιπών εσόδων\n0. Επιστροφή");
             System.out.print("Επιλογή: ");
 
             int c = scanner.nextInt();
+            if (c == 0) return; // Επιστροφή στην προηγούμενη οθόνη
 
-            double percent, oldVal, newVal;
+            double oldVal = 0;
+            String label = "";
 
+            // Επιλογή μόνο του πεδίου που θα αλλάξει
             switch (c) {
-                case 1:
-                    System.out.print("Ποσοστό μεταβολής στους Φόρους (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.taxes;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.taxes = newVal;
-                    System.out.println("Νέα τιμή φόρων: " + newVal);
-                    break;
-
-                case 2:
-                    System.out.print("Ποσοστό μεταβολής στις κοινωνικές εισφορές (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.socialContributions;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.socialContributions = newVal;
-                    System.out.println("Νέα τιμή εισφορών: " + newVal);
-                    break;
-
-                case 3:
-                    System.out.print("Ποσοστό μεταβολής στις πωλήσεις (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.salesGoodsServices;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.salesGoodsServices = newVal;
-                    System.out.println("Νέο ποσό πωλήσεων: " + newVal);
-                    break;
-                
-                case 4:
-                    System.out.print("Ποσοστό μεταβολής στα λοιπά έσοδα (%): ");
-                    percent = scanner.nextDouble();
-                    oldVal = budget.otherCurrentRevenue;
-                    newVal = oldVal * (1 + percent/100.0);
-                    budget.otherCurrentRevenue = newVal;
-                    System.out.println("Νέο ποσό λοιπών εσόδων: " + newVal);
-                    break;
-                
-                case 0:
-                    break;
-
-                default:
-                    System.out.println("Μη έγκυρη επιλογή.");
+                case 1: oldVal = budget.taxes; label = "Φόρων"; break;
+                case 2: oldVal = budget.socialContributions; label = "Εισφορών"; break;
+                case 3: oldVal = budget.salesGoodsServices; label = "Πωλήσεων"; break;
+                case 4: oldVal = budget.otherCurrentRevenue; label = "Λοιπών Εσόδων"; break;
+                default: System.out.println("Μη έγκυρη επιλογή."); return;
             }
 
-        
+            System.out.print("Ποσοστό μεταβολής (%): ");
+            double percent = scanner.nextDouble();
+            double newVal = oldVal * (1 + percent / 100.0); // Υπολογισμός μεταβολής
+
+            // ΣΥΜΠΛΗΡΩΣΗ: Έλεγχος περιορισμού για αρνητικές τιμές
+            if (newVal < 0) {
+                System.out.println("Σφάλμα: Η μεταβολή αυτή οδηγεί σε αρνητικά έσοδα! Η πράξη ακυρώθηκε.");
+            } else {
+                updateRevenueField(c, newVal); // Ενημέρωση του budget
+                System.out.println("Επιτυχής αλλαγή! Νέα τιμή " + label + ": " + newVal + " €");
+            }
         }
+
+        // Βοηθητική μέθοδος για την ανάθεση της τιμής
+        private void updateRevenueField(int choice, double value) {
+            switch (choice) {
+                case 1: budget.taxes = value; break;
+                case 2: budget.socialContributions = value; break;
+                case 3: budget.salesGoodsServices = value; break;
+                case 4: budget.otherCurrentRevenue = value; break;
+            }
+        }
+
+
 
         //ΜΕΡΟΣ 2ο της 7ης επιλογής - Σενάριο Αλλαγής Δαπανών
 
@@ -351,7 +335,7 @@ public class BudgetManager {
 
             System.out.println("===== ΑΛΛΑΓΕΣ ΑΝΑ ΥΠΟΥΡΓΕΙΟ =====");
         
-         // 1. Εμφάνιση όλων των υπουργείων
+            // 1. Εμφάνιση όλων των υπουργείων
             for (int i = 0; i < budget.ministries.length; i++) {
             System.out.println((i + 1) + ". " + budget.ministries[i]);
             }
