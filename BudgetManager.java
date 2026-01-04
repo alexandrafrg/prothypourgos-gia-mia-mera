@@ -281,7 +281,7 @@ public class BudgetManager {
 
             // 2. Ενοποιημένη εισαγωγή ποσοστού
             System.out.print("Ποσοστό μεταβολής (%): ");
-             percent = scanner.nextDouble();
+            double percent = scanner.nextDouble();
             double newVal = oldVal * (1 + percent / 100.0);
 
             // 3. ΕΛΕΓΧΟΣ ΠΕΡΙΟΡΙΣΜΟΥ 
