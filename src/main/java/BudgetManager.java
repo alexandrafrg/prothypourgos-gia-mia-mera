@@ -19,10 +19,13 @@ public class BudgetManager {
 
         System.out.println("\nΑνάλυση ανά Υπουργείο:");
         for (int i = 0; i < budget.ministries.length; i++) {
-            System.out.println((i + 1) + ". " + budget.ministries[i] +
-                    "\n   Έσοδα: " + budget.ministryRevenue[i] +
-                    "\n   Έξοδα: " + budget.ministryExpenses[i] + "\n");
+            Ministry m = budget.ministries[i];
+            
+            System.out.println((i + 1) + ". " + m.getName() +
+            "\n   Έσοδα: " + m.getRevenue() +
+            "\n   Έξοδα: " + m.getExpenses() + "\n");
         }
+
     }
 
     // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
