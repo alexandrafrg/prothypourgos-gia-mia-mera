@@ -468,5 +468,5 @@ public class BudgetManager {
             System.out.println("----------------------------------------");
             System.out.println("Μεταβολή ισοζυγίου : " + (finalBalance - initialBalance));
         }
-    }
+}
 
