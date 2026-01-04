@@ -34,9 +34,9 @@ public class BudgetManager {
         System.out.println("\n===== ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ =====");
 
         for (int i = 0; i < budget.ministries.length; i++) {
-            System.out.println((i + 1) + ". " + budget.ministries[i] +
-                    " (Τρέχον: " + budget.ministryExpenses[i] + ")");
-        }
+            Ministry m = budget.ministries[i];
+            System.out.println((i + 1) + ". " + m.getName() + " (Τρέχον: " + m.getExpenses() + ")");
+        } 
 
         System.out.print("Διάλεξε υπουργείο: ");
         int index = input.nextInt() - 1;
@@ -46,10 +46,11 @@ public class BudgetManager {
             return;
         }
 
-        double oldValue = budget.ministryExpenses[index];
+        Ministry m = budget.ministries[index];
+        double oldValue = m.getExpenses();
 
         System.out.print("Νέα τιμή εξόδων: ");
-        input.nextLine(); // καθαρισμός buffer
+        input.nextLine(); 
         double newValue = Double.parseDouble(input.nextLine());
 
         if (newValue < 0) {
@@ -57,11 +58,10 @@ public class BudgetManager {
             return;
         }
 
-        budget.ministryExpenses[index] = newValue;
+        m.setExpenses(newValue);           
 
-        // Καταγραφή αλλαγής
-        changesLog.append("[" + budget.ministries[index] + "] "
-                + oldValue + " → " + newValue + "\n");
+        changesLog.append("[" + m.getName() + "] "  
+        + oldValue + " → " + newValue + "\n");
 
         System.out.println("Η αλλαγή αποθηκεύτηκε!");
     }
@@ -98,10 +98,10 @@ public class BudgetManager {
         System.out.println("\n===== ΑΝΑΛΥΣΗ ΑΝΑ ΥΠΟΥΡΓΕΙΟ =====");
 
         for (int i = 0; i < budget.ministries.length; i++) {
-
-            double rev = budget.ministryRevenue[i];
-            double exp = budget.ministryExpenses[i];
-            double diff = rev - exp;
+            Ministry m = budget.ministries[i];   
+            double rev = m.getRevenue();         
+            double exp = m.getExpenses();        
+            double diff = m.getBalance();
 
             System.out.println("\n" + budget.ministries[i]);
             System.out.println("Έσοδα: " + rev);
@@ -124,14 +124,13 @@ public class BudgetManager {
         int choice = input.nextInt();
 
         if (choice == 1) {
-            System.out.println("\n===== TOP-3 ΕΣΟΔΑ =====");
-            showTop3(budget.ministries, budget.ministryRevenue);
+            showTop3Revenue(budget.ministries);
         } else if (choice == 2) {
-            System.out.println("\n===== TOP-3 ΕΞΟΔΑ =====");
-            showTop3(budget.ministries, budget.ministryExpenses);
+             showTop3Expenses(budget.ministries);
         } else {
-            System.out.println("Μη έγκυρη επιλογή.");
+             System.out.println("Μη έγκυρη επιλογή.");
         }
+
     }
 
     private void showTop3(String[] names, double[] values) {
@@ -346,27 +345,27 @@ public class BudgetManager {
             // 5. Ανάλογα με τον τύπο, αλλάζουμε έσοδα ή έξοδα
             if (type == 1) {
         
-                double oldVal = budget.ministryRevenue[choice];
-                double newVal = oldVal * (1 + percent / 100.0);
+               Ministry m = budget.ministries[choice];  
+               double oldVal = m.getRevenue();           
+               double newVal = oldVal * (1 + percent / 100.0); 
+               m.setRevenue(newVal);        
 
-                budget.ministryRevenue[choice] = newVal;
-
-                System.out.println("\n--- Αλλαγή ΕΣΟΔΩΝ ---");
-                System.out.println("Υπουργείο: " + budget.ministries[choice]);
-                System.out.println("Πριν: " + oldVal + " €");
-                System.out.println("Μετά: " + newVal + " €");
+               System.out.println("\n--- Αλλαγή ΕΣΟΔΩΝ ---");
+               System.out.println("Υπουργείο: " + m.getName());
+               System.out.println("Πριν: " + oldVal + " €");
+               System.out.println("Μετά: " + newVal + " €");
 
             } else if (type == 2) {
 
-            double oldVal = budget.ministryExpenses[choice];
+            double oldVal = m.getExpenses();
             double newVal = oldVal * (1 + percent / 100.0);
-
-            budget.ministryExpenses[choice] = newVal;
-
+            m.setExpenses(newVal);
+            
             System.out.println("\n--- Αλλαγή ΕΞΟΔΩΝ ---");
-            System.out.println("Υπουργείο: " + budget.ministries[choice]);
+            System.out.println("Υπουργείο: " + m.getName());
             System.out.println("Πριν: " + oldVal + " €");
             System.out.println("Μετά: " + newVal + " €");
+
 
             } else {
             System.out.println("Μη έγκυρη επιλογή.");
@@ -435,5 +434,21 @@ public class BudgetManager {
             System.out.println("----------------------------------------");
             System.out.println("Μεταβολή ισοζυγίου : " + (finalBalance - initialBalance));
         }
+        private void showTop3Revenue(Ministry[] ministries) {
+            Ministry[] sorted = Arrays.copyOf(ministries, ministries.length);
+            Arrays.sort(sorted, (a, b) -> Double.compare(b.getRevenue(), a.getRevenue())); 
+            System.out.println("\n===== TOP-3 Υπουργεία με τα υψηλότερα έσοδα =====");
+            for (int i = 0; i < Math.min(3, sorted.length); i++) {
+                System.out.println(sorted[i].getName() + " → " + sorted[i].getRevenue());
+            }
+        }
+        
+        private void showTop3Expenses(Ministry[] ministries) {
+            Ministry[] sorted = Arrays.copyOf(ministries, ministries.length);
+            Arrays.sort(sorted, (a, b) -> Double.compare(b.getExpenses(), a.getExpenses()));
+            System.out.println("\n===== TOP-3 Υπουργεία με τα υψηλότερα έξοδα =====");
+            for (int i = 0; i < Math.min(3, sorted.length); i++) {
+                System.out.println(sorted[i].getName() + " → " + sorted[i].getExpenses());
+            }
+        }
 }
-
