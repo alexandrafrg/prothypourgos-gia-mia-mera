@@ -141,7 +141,7 @@ public class BudgetManager {
     }
 
     private void showTop3(boolean isRevenue) {
-        Ministry[] sorted = Arrays.copyOf(budget.getMinistries, budget.ministries.length);
+        Ministry[] sorted = Arrays.copyOf(budget.getMinistries(), budget.getMinistries().length);
         
         Arrays.sort(sorted, (a, b) -> Double.compare(
             isRevenue ? b.getRevenue() : b.getExpenses(),
@@ -281,12 +281,12 @@ public class BudgetManager {
 
         // 1. Επιλογή κατηγορίας δαπάνης
         switch (c) {
-            case 1: oldVal = budget.getEmployeeCompensation; label = "Μισθών"; break;
-            case 2: oldVal = budget.getSocialBenefits; label = "Συντάξεων"; break;
-            case 3: oldVal = budget.getGoodsServicesPurchases; label = "Λειτουργικών"; break;
-            case 4: oldVal = budget.getTransfersExpenses; label = "Μεταβιβάσεων"; break;
-            case 5: oldVal = budget.getSubsidies; label = "Επιδοτήσεων"; break;
-            case 6: oldVal = budget.getAllocatedCredits; label = "Πιστώσεων"; break;
+            case 1: oldVal = budget.getEmployeeCompensation(); label = "Μισθών"; break;
+            case 2: oldVal = budget.getSocialBenefits(); label = "Συντάξεων"; break;
+            case 3: oldVal = budget.getGoodsServicesPurchases(); label = "Λειτουργικών"; break;
+            case 4: oldVal = budget.getTransfersExpenses(); label = "Μεταβιβάσεων"; break;
+            case 5: oldVal = budget.getSubsidies(); label = "Επιδοτήσεων"; break;
+            case 6: oldVal = budget.getAllocatedCredits(); label = "Πιστώσεων"; break;
             default:
                 System.out.println("Μη έγκυρη επιλογή.");
                 return;
