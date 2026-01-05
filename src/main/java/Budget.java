@@ -1,43 +1,21 @@
 public class Budget {
     //ΕΣΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
-    private double totalRevenue = 1304827000000.0; // Σύνολο Εσόδων
     private double taxes = 62055000000.0;              //Φόροι
     private double socialContributions = 60000000.0;   //Κοινωνικές εισφορές
     private double transfers = 8131000000.0;           //Μεταβιβάσεις
     private double salesGoodsServices = 2405000000.0;  //Πωλήσεις αγαθών & υπηρεσιών
     private double otherCurrentRevenue = 2775000000.0; //Λοιπά τρέχοντα έσοδα
 
-    private double fixedAssetsRevenue = 37000000.0;    //Πάγια περιουσιακά στοιχεία
-    private double debtSecuritiesRevenue = 11000000.0; //Χρεωστικοί τίτλοι
-    private double loansRevenue = 20000000.0;          //Δάνεια
-    private double equityShares = 467000000.0;         //Συμμετοχικοί τίτλοι & μερίδια
-    private double depositsLiabilities = 66000000.0;   //Υποχρεώσεις από νόμισμα/καταθέσεις
-    private double debtSecuritiesLiabilities = 25973000000.0; //Χρεωστικοί τίτλοι
-    private double loansLiabilities = 1202027000000.0; //Δάνεια
-    private double financialDerivatives = 800000000.0; //Παράγωγα
-
     //ΕΞΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
-    private double totalExpenditure = 1307907506000.0;       //Σύνολο εξόδων
     private double employeeCompensation = 14889199000.0;     //Παροχές σε εργαζομένους
     private double socialBenefits = 425136000.0;             //Κοινωνικές παροχές
     private double transfersExpenses = 34741365000.0;        //Μεταβιβάσεις
     private double goodsServicesPurchases = 2039542000.0;    //Αγορές αγαθών και υπηρεσιών
     private double subsidies = 80630000.0;                   //Επιδοτήσεις
-    private double interestPayments = 7701101000.0;          //Τόκοι 
-    private double otherExpenses = 101553000.0;              //Λοιπές δαπάνες
     private double allocatedCredits = 17283053000.0;         //Πιστώσεις υπό κατανομή
-    private double fixedAssetsExpenditure = 2609600000.0;    //Πάγια περιουσιακά στοιχεία
-    private double valuables = 85000.0;                      //Τιμαλφή
-    private double loansExpenses = 3741000000.0;             //Δάνεια
-    private double equitySharesExpenses = 1755112000.0;      //Συμμετοχικοί τίτλοι/μερίδια
-    private double debtSecuritiesExpenses = 19375000000.0;   //Χρεωστικοί τίτλοι
-    private double loansExpenses54 = 1203165130000.0;        //Δάνεια
     
     //ΠΙΝΑΚΑΣ ΜΕ ΥΠΟΥΡΓΕΙΑ
-    public Ministry[] ministries;
-
-    // ΑΡΧΙΚΟ ΙΣΟΖΥΓΙΟ
-    private double result = -3080506000.0; //Έσοδα - Έξοδα (αρχικό - πριν τις αλλαγές)
+    private Ministry[] ministries;
 
     // CONSTRUCTOR : αρχικοποιεί όλα τα υπουργεία
     public Budget() {
@@ -65,6 +43,40 @@ public class Budget {
         };
     }
 
+    public Ministry[] getMinistries() { return ministries; }
+    
+    // Getters/Setters για Έσοδα
+    public double getTaxes() { return taxes; }
+    public void setTaxes(double taxes) { this.taxes = taxes; }
+
+    public double getSocialContributions() { return socialContributions; }
+    public void setSocialContributions(double val) { this.socialContributions = val; }
+
+    public double getSalesGoodsServices() { return salesGoodsServices; }
+    public void setSalesGoodsServices(double val) { this.salesGoodsServices = val; }
+
+    public double getOtherCurrentRevenue() { return otherCurrentRevenue; }
+    public void setOtherCurrentRevenue(double val) { this.otherCurrentRevenue = val; }
+
+    // Getters/Setters για Έξοδα
+    public double getEmployeeCompensation() { return employeeCompensation; }
+    public void setEmployeeCompensation(double val) { this.employeeCompensation = val; }
+
+    public double getSocialBenefits() { return socialBenefits; }
+    public void setSocialBenefits(double val) { this.socialBenefits = val; }
+
+    public double getGoodsServicesPurchases() { return goodsServicesPurchases; }
+    public void setGoodsServicesPurchases(double val) { this.goodsServicesPurchases = val; }
+
+    public double getTransfersExpenses() { return transfersExpenses; }
+    public void setTransfersExpenses(double val) { this.transfersExpenses = val; }
+
+    public double getSubsidies() { return subsidies; }
+    public void setSubsidies(double val) { this.subsidies = val; }
+
+    public double getAllocatedCredits() { return allocatedCredits; }
+    public void setAllocatedCredits(double val) { this.allocatedCredits = val; }
+    
     // ΥΠΟΛΟΓΙΣΜΟΣ ΣΥΝΟΛΙΚΩΝ ΕΣΟΔΩΝ ΤΩΝ ΥΠΟΥΡΓΕΙΩΝ
     public double getMinistriesRevenue() {
         double sum = 0;
@@ -82,26 +94,22 @@ public class Budget {
         }
         return sum;
     }
-
-    // ΣΥΝΟΛΙΚΑ ΕΣΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ (ΥΠΟΥΡΓΕΙΑ + ΥΠΟΛΟΙΠΑ)
-    public double getTotalRevenue() {
-        return totalRevenue + getMinistriesRevenue();
-    }
-
-    // ΣΥΝΟΛΙΚΑ ΕΣΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ (ΥΠΟΥΡΓΕΙΑ + ΥΠΟΛΟΙΠΑ)
-    public double getTotalExpenditure() {
-        return totalExpenditure + getMinistriesExpenses();
-    }
-
-    // ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟ (έσοδα - έξοδα)
-    public double calculateBalance() {
-        return getTotalRevenue() - getTotalExpenditure();
-    }
+    
+    // Υπολογισμός Εσόδων: Κατηγορίες Εσόδων + Έσοδα Υπουργείων
     public double getRevenue() {
-        return getTotalRevenue();
+        return taxes + socialContributions + transfers + salesGoodsServices + otherCurrentRevenue 
+            + getMinistriesRevenue();
     }
 
+    // Υπολογισμός Εξόδων: Κατηγορίες Εξόδων + Έξοδα Υπουργείων
     public double getExpenses() {
-        return getTotalExpenditure();
+        return employeeCompensation + socialBenefits + transfersExpenses + goodsServicesPurchases 
+            + subsidies + allocatedCredits + getMinistriesExpenses();
     }
+
+    // ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ (έσοδα - έξοδα)
+    public double calculateBalance() {
+        return getRevenue() - getExpenses();
+    }
+    
 }
