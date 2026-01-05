@@ -11,9 +11,8 @@ public class Main {
         BudgetManager manager = new BudgetManager(budget);
 
 
-        int choice;
+        int choice = -1;
            
-            //καινουριος κωδικας
         do {
             System.out.println("===== ΠΡΩΘΥΠΟΥΡΓΟΣ ΓΙΑ ΜΙΑ ΜΕΡΑ =====");
             System.out.println("1. Προβολή προϋπολογισμού");
@@ -26,6 +25,12 @@ public class Main {
             System.out.println("0. Έξοδος");
             System.out.print("Επιλογή: ");
  
+            while (!input.hasNextInt()) {
+                System.out.println("Σφάλμα: Παρακαλώ εισάγετε έναν αριθμό από 0 έως 7.");
+                System.out.print("Επιλογή: ");
+                input.next(); // "Καθαρίζουμε" την λανθασμένη είσοδο από τη μνήμη
+            }
+            
             choice = input.nextInt();
 
 
@@ -57,7 +62,6 @@ public class Main {
                 default:
                     System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά! Από 0 έως 7.");
             }
-        //τελος καινουριου
 
             System.out.println();
 
@@ -67,4 +71,5 @@ public class Main {
 
         input.close();
     }
+
 }
