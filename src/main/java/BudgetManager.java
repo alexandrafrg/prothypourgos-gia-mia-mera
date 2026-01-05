@@ -236,7 +236,7 @@ public class BudgetManager {
             updateRevenueField(c, newVal); // Ενημέρωση του budget
             System.out.println("Επιτυχής αλλαγή! Νέα τιμή " + label + ": " + newVal + " €");
         }
-}
+    }
 
     // Βοηθητική μέθοδος για την ανάθεση της τιμής
     private void updateRevenueField(int choice, double value) {
@@ -448,5 +448,5 @@ public class BudgetManager {
             System.out.println(sorted[i].getName() + " → " + sorted[i].getExpenses());
         }
     }
-    
+
 }
