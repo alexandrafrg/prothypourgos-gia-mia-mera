@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Comparator;
 
 public class BudgetManager {
 
@@ -147,14 +148,14 @@ public class BudgetManager {
         }
     }
 
-        private int findIndex(double[] arr, double value) {
-                for (int i = 0; i < arr.length; i++){
-                    if (arr[i] == value){
-                        return i;
-                    }
-                }
-                return -1;
+    private int findIndex(double[] arr, double value) {
+        for (int i = 0; i < arr.length; i++){
+            if (arr[i] == value){
+                return i;
+            }
         }
+        return -1;
+    }
 
     // 7. ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
     public void executeScenario(Scanner scanner) {
@@ -202,161 +203,157 @@ public class BudgetManager {
     }
 
 
-        //ΜΕΡΟΣ 1ο της 7ης επιλογής - Σενάριο Αλλαγής Εσόδων 
+    //ΜΕΡΟΣ 1ο της 7ης επιλογής - Σενάριο Αλλαγής Εσόδων 
     
-        private void scenarioRevenue(Scanner scanner) { 
-            System.out.println("===== ΣΕΝΑΡΙΑ ΕΣΟΔΩΝ =====");
-            System.out.println("1. Αλλαγή Φόρων\n2. Αλλαγή Κοινωνικών Εισφορών\n3. Αλλαγή Πωλήσεων\n4. Αλλαγή λοιπών εσόδων\n0. Επιστροφή");
-            System.out.print("Επιλογή: ");
+    private void scenarioRevenue(Scanner scanner) { 
+        System.out.println("===== ΣΕΝΑΡΙΑ ΕΣΟΔΩΝ =====");
+        System.out.println("1. Αλλαγή Φόρων\n2. Αλλαγή Κοινωνικών Εισφορών\n3. Αλλαγή Πωλήσεων\n4. Αλλαγή λοιπών εσόδων\n0. Επιστροφή");
+        System.out.print("Επιλογή: ");
 
-            int c = scanner.nextInt();
-            if (c == 0) return; // Επιστροφή στην προηγούμενη οθόνη
+        int c = scanner.nextInt();
+        if (c == 0) return; // Επιστροφή στην προηγούμενη οθόνη
 
-            double oldVal = 0;
-            String label = "";
+        double oldVal = 0;
+        String label = "";
 
-            // Επιλογή μόνο του πεδίου που θα αλλάξει
-            switch (c) {
-                case 1: oldVal = budget.taxes; label = "Φόρων"; break;
-                case 2: oldVal = budget.socialContributions; label = "Εισφορών"; break;
-                case 3: oldVal = budget.salesGoodsServices; label = "Πωλήσεων"; break;
-                case 4: oldVal = budget.otherCurrentRevenue; label = "Λοιπών Εσόδων"; break;
-                default: System.out.println("Μη έγκυρη επιλογή."); return;
-            }
-
-            System.out.print("Ποσοστό μεταβολής (%): ");
-            double percent = scanner.nextDouble();
-            double newVal = oldVal * (1 + percent / 100.0); // Υπολογισμός μεταβολής
-
-            // ΣΥΜΠΛΗΡΩΣΗ: Έλεγχος περιορισμού για αρνητικές τιμές
-            if (newVal < 0) {
-                System.out.println("Σφάλμα: Η μεταβολή αυτή οδηγεί σε αρνητικά έσοδα! Η πράξη ακυρώθηκε.");
-            } else {
-                updateRevenueField(c, newVal); // Ενημέρωση του budget
-                System.out.println("Επιτυχής αλλαγή! Νέα τιμή " + label + ": " + newVal + " €");
-            }
+        // Επιλογή μόνο του πεδίου που θα αλλάξει
+        switch (c) {
+            case 1: oldVal = budget.taxes; label = "Φόρων"; break;
+            case 2: oldVal = budget.socialContributions; label = "Εισφορών"; break;
+            case 3: oldVal = budget.salesGoodsServices; label = "Πωλήσεων"; break;
+            case 4: oldVal = budget.otherCurrentRevenue; label = "Λοιπών Εσόδων"; break;
+            default: System.out.println("Μη έγκυρη επιλογή."); return;
         }
 
-        // Βοηθητική μέθοδος για την ανάθεση της τιμής
-        private void updateRevenueField(int choice, double value) {
-            switch (choice) {
-                case 1: budget.taxes = value; break;
-                case 2: budget.socialContributions = value; break;
-                case 3: budget.salesGoodsServices = value; break;
-                case 4: budget.otherCurrentRevenue = value; break;
-            }
+        System.out.print("Ποσοστό μεταβολής (%): ");
+        double percent = scanner.nextDouble();
+        double newVal = oldVal * (1 + percent / 100.0); // Υπολογισμός μεταβολής
+
+        // ΣΥΜΠΛΗΡΩΣΗ: Έλεγχος περιορισμού για αρνητικές τιμές
+        if (newVal < 0) {
+            System.out.println("Σφάλμα: Η μεταβολή αυτή οδηγεί σε αρνητικά έσοδα! Η πράξη ακυρώθηκε.");
+        } else {
+            updateRevenueField(c, newVal); // Ενημέρωση του budget
+            System.out.println("Επιτυχής αλλαγή! Νέα τιμή " + label + ": " + newVal + " €");
         }
+}
 
-
-
-        //ΜΕΡΟΣ 2ο της 7ης επιλογής - Σενάριο Αλλαγής Δαπανών
-
-        private void scenarioExpenditure(Scanner scanner) {
-            System.out.println("\n===== ΣΕΝΑΡΙΑ ΔΑΠΑΝΩΝ =====");
-            System.out.println("1. Μισθοί δημοσίου");
-            System.out.println("2. Συντάξεις / κοινωνικές παροχές");
-            System.out.println("3. Λειτουργικά έξοδα (αγορές αγαθών/υπηρεσιών)");
-            System.out.println("4. Μεταβιβάσεις");
-            System.out.println("5. Επιδοτήσεις");
-            System.out.println("6. Πιστώσεις υπό κατανομή");
-            System.out.println("0. Επιστροφή");
-            System.out.print("Επιλογή: ");
-
-            int c = scanner.nextInt();
-            if (c == 0) return; // Επιστροφή στο προηγούμενο μενού
-
-            double oldVal = 0;
-            String label = "";
-
-            // 1. Ενοποίηση επιλογής κατηγορίας δαπάνης
-            switch (c) {
-                case 1: oldVal = budget.employeeCompensation; label = "Μισθών"; break;
-                case 2: oldVal = budget.socialBenefits; label = "Συντάξεων"; break;
-                case 3: oldVal = budget.goodsServicesPurchases; label = "Λειτουργικών"; break;
-                case 4: oldVal = budget.transfersExpenses; label = "Μεταβιβάσεων"; break;
-                case 5: oldVal = budget.subsidies; label = "Επιδοτήσεων"; break;
-                case 6: oldVal = budget.allocatedCredits; label = "Πιστώσεων"; break;
-                default:
-                    System.out.println("Μη έγκυρη επιλογή.");
-                    return;
-            }
-
-            // 2. Ενοποιημένη εισαγωγή ποσοστού
-            System.out.print("Ποσοστό μεταβολής (%): ");
-            double percent = scanner.nextDouble();
-            double newVal = oldVal * (1 + percent / 100.0);
-
-            // 3. ΕΛΕΓΧΟΣ ΠΕΡΙΟΡΙΣΜΟΥ 
-            // Εξασφαλίζουμε ότι καμία δαπάνη δεν θα γίνει αρνητική
-            if (newVal < 0) {
-                System.out.println("Σφάλμα: Οι δαπάνες δεν μπορούν να έχουν αρνητική τιμή! Η πράξη ακυρώθηκε.");
-            } else {
-                // 4. Ενημέρωση του Budget
-                updateExpenditureField(c, newVal);
-                System.out.println("Επιτυχής αλλαγή! Νέα τιμή " + label + ": " + newVal + " €");
-            }
+    // Βοηθητική μέθοδος για την ανάθεση της τιμής
+    private void updateRevenueField(int choice, double value) {
+        switch (choice) {
+            case 1: budget.taxes = value; break;
+            case 2: budget.socialContributions = value; break;
+            case 3: budget.salesGoodsServices = value; break;
+            case 4: budget.otherCurrentRevenue = value; break;
         }
+    }
 
-        // Βοηθητική μέθοδος για την ανάθεση της τιμής στο σωστό πεδίο των δαπανών
-        private void updateExpenditureField(int choice, double value) {
-            switch (choice) {
-                case 1: budget.employeeCompensation = value; break;
-                case 2: budget.socialBenefits = value; break;
-                case 3: budget.goodsServicesPurchases = value; break;
-                case 4: budget.transfersExpenses = value; break;
-                case 5: budget.subsidies = value; break;
-                case 6: budget.allocatedCredits = value; break;
-            }
-        }
-        
-        
 
-        //ΜΕΡΟΣ 3ο της 7ης επιλογής - Σενάριο Αλλαγής σε Υπουργεία
 
-        private void scenarioMinistries(Scanner scanner) {
+    //ΜΕΡΟΣ 2ο της 7ης επιλογής - Σενάριο Αλλαγής Δαπανών
 
-            System.out.println("===== ΑΛΛΑΓΕΣ ΑΝΑ ΥΠΟΥΡΓΕΙΟ =====");
-        
-            // 1. Εμφάνιση όλων των υπουργείων
-            for (int i = 0; i < budget.ministries.length; i++) {
-            System.out.println((i + 1) + ". " + budget.ministries[i]);
-            }
+    private void scenarioExpenditure(Scanner scanner) {
+        System.out.println("\n===== ΣΕΝΑΡΙΑ ΔΑΠΑΝΩΝ =====");
+        System.out.println("1. Μισθοί δημοσίου");
+        System.out.println("2. Συντάξεις / κοινωνικές παροχές");
+        System.out.println("3. Λειτουργικά έξοδα (αγορές αγαθών/υπηρεσιών)");
+        System.out.println("4. Μεταβιβάσεις");
+        System.out.println("5. Επιδοτήσεις");
+        System.out.println("6. Πιστώσεις υπό κατανομή");
+        System.out.println("0. Επιστροφή");
+        System.out.print("Επιλογή: ");
 
-            // 2. Επιλογή υπουργείου
-            System.out.print("Επιλέξτε υπουργείο: ");
-            int choice = scanner.nextInt() - 1;   // κάνουμε -1 για index πίνακα
+        int c = scanner.nextInt();
+        if (c == 0) return; // Επιστροφή στο προηγούμενο μενού
 
-            if (choice < 0 || choice >= budget.ministries.length) {
+        double oldVal = 0;
+        String label = "";
+
+        // 1. Ενοποίηση επιλογής κατηγορίας δαπάνης
+        switch (c) {
+            case 1: oldVal = budget.employeeCompensation; label = "Μισθών"; break;
+            case 2: oldVal = budget.socialBenefits; label = "Συντάξεων"; break;
+            case 3: oldVal = budget.goodsServicesPurchases; label = "Λειτουργικών"; break;
+            case 4: oldVal = budget.transfersExpenses; label = "Μεταβιβάσεων"; break;
+            case 5: oldVal = budget.subsidies; label = "Επιδοτήσεων"; break;
+            case 6: oldVal = budget.allocatedCredits; label = "Πιστώσεων"; break;
+            default:
                 System.out.println("Μη έγκυρη επιλογή.");
-            return;
-            }
+                return;
+        }
 
-            // 3. Επιλογή τύπου αλλαγής
-            System.out.println("Τι θέλετε να αλλάξετε;");
-            System.out.println("1. Έσοδα υπουργείου");
-            System.out.println("2. Έξοδα υπουργείου");
-            System.out.print("Επιλογή: ");
-            int type = scanner.nextInt();
+        // 2. Ενοποιημένη εισαγωγή ποσοστού
+        System.out.print("Ποσοστό μεταβολής (%): ");
+        double percent = scanner.nextDouble();
+        double newVal = oldVal * (1 + percent / 100.0);
 
-            // 4. Ποσοστό μεταβολής
-            System.out.print("Ποσοστό μεταβολής (%): ");
-            double percent = scanner.nextDouble();
+        // 3. ΕΛΕΓΧΟΣ ΠΕΡΙΟΡΙΣΜΟΥ 
+        // Εξασφαλίζουμε ότι καμία δαπάνη δεν θα γίνει αρνητική
+        if (newVal < 0) {
+            System.out.println("Σφάλμα: Οι δαπάνες δεν μπορούν να έχουν αρνητική τιμή! Η πράξη ακυρώθηκε.");
+        } else {
+            // 4. Ενημέρωση του Budget
+            updateExpenditureField(c, newVal);
+            System.out.println("Επιτυχής αλλαγή! Νέα τιμή " + label + ": " + newVal + " €");
+        }
+    }
 
-            // 5. Ανάλογα με τον τύπο, αλλάζουμε έσοδα ή έξοδα
-            if (type == 1) {
+    // Βοηθητική μέθοδος για την ανάθεση της τιμής στο σωστό πεδίο των δαπανών
+    private void updateExpenditureField(int choice, double value) {
+        switch (choice) {
+            case 1: budget.employeeCompensation = value; break;
+            case 2: budget.socialBenefits = value; break;
+            case 3: budget.goodsServicesPurchases = value; break;
+            case 4: budget.transfersExpenses = value; break;
+            case 5: budget.subsidies = value; break;
+            case 6: budget.allocatedCredits = value; break;
+        }
+    }
+      
         
-               Ministry m = budget.ministries[choice];  
-               double oldVal = m.getRevenue();           
-               double newVal = oldVal * (1 + percent / 100.0); 
-               m.setRevenue(newVal);        
+    //ΜΕΡΟΣ 3ο της 7ης επιλογής - Σενάριο Αλλαγής σε Υπουργεία
 
-               System.out.println("\n--- Αλλαγή ΕΣΟΔΩΝ ---");
-               System.out.println("Υπουργείο: " + m.getName());
-               System.out.println("Πριν: " + oldVal + " €");
-               System.out.println("Μετά: " + newVal + " €");
+    private void scenarioMinistries(Scanner scanner) {
 
-            } else if (type == 2) {
+        System.out.println("===== ΑΛΛΑΓΕΣ ΑΝΑ ΥΠΟΥΡΓΕΙΟ =====");
+        
+        // 1. Εμφάνιση όλων των υπουργείων
+        for (int i = 0; i < budget.ministries.length; i++) {
+            System.out.println((i + 1) + ". " + budget.ministries[i]);
+        }
 
+        // 2. Επιλογή υπουργείου
+        System.out.print("Επιλέξτε υπουργείο: ");
+        int choice = scanner.nextInt() - 1;   // κάνουμε -1 για index πίνακα
+
+        if (choice < 0 || choice >= budget.ministries.length) {
+            System.out.println("Μη έγκυρη επιλογή.");
+            return;
+        }
+
+        // 3. Επιλογή τύπου αλλαγής
+        System.out.println("Τι θέλετε να αλλάξετε;");
+        System.out.println("1. Έσοδα υπουργείου");
+        System.out.println("2. Έξοδα υπουργείου");
+        System.out.print("Επιλογή: ");
+        int type = scanner.nextInt();
+
+        // 4. Ποσοστό μεταβολής
+        System.out.print("Ποσοστό μεταβολής (%): ");
+        double percent = scanner.nextDouble();
+
+        // 5. Ανάλογα με τον τύπο, αλλάζουμε έσοδα ή έξοδα
+        if (type == 1) {
+            Ministry m = budget.ministries[choice];  
+            double oldVal = m.getRevenue();           
+            double newVal = oldVal * (1 + percent / 100.0); 
+            m.setRevenue(newVal);        
+
+            System.out.println("\n--- Αλλαγή ΕΣΟΔΩΝ ---");
+            System.out.println("Υπουργείο: " + m.getName());
+            System.out.println("Πριν: " + oldVal + " €");
+            System.out.println("Μετά: " + newVal + " €");
+        } else if (type == 2) {
             double oldVal = m.getExpenses();
             double newVal = oldVal * (1 + percent / 100.0);
             m.setExpenses(newVal);
@@ -365,90 +362,91 @@ public class BudgetManager {
             System.out.println("Υπουργείο: " + m.getName());
             System.out.println("Πριν: " + oldVal + " €");
             System.out.println("Μετά: " + newVal + " €");
-
-
-            } else {
+        } else {
             System.out.println("Μη έγκυρη επιλογή.");
-            }
-
-
         }
 
-            // ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγών
+    }
 
-        private void scenarioCombined(Scanner scanner) {
+    // ΜΕΡΟΣ 4ο της 7ης επιλογής - Σενάριο Ταυτόχρονων Αλλαγών
 
-            System.out.println("===== ΤΑΥΤΟΧΡΟΝΕΣ ΑΛΛΑΓΕΣ =====");
+    private void scenarioCombined(Scanner scanner) {
 
-            // Αποθήκευση αρχικών τιμών προυπολογισμού (πριν εκτελεστεί το σενάριο)
-            double initialRevenue = budget.getRevenue();
-            double initialExpenses = budget.getExpenses();
-            double initialBalance = initialRevenue - initialExpenses;
+        System.out.println("===== ΤΑΥΤΟΧΡΟΝΕΣ ΑΛΛΑΓΕΣ =====");
 
-            boolean done = false;
+        // Αποθήκευση αρχικών τιμών προυπολογισμού (πριν εκτελεστεί το σενάριο)
+        double initialRevenue = budget.getRevenue();
+        double initialExpenses = budget.getExpenses();
+        double initialBalance = initialRevenue - initialExpenses;
 
-            // Το σενάριο αρχίζει να εκτελείται
+        boolean done = false;
 
-            while (!done) {
-                System.out.println("\n--- Επιλέξτε τι θέλετε να αλλάξετε ---");
-                System.out.println("1. Αλλαγές στα ΕΣΟΔΑ (φόροι, εισφορές κ.λπ.)");
-                System.out.println("2. Αλλαγές στις ΔΑΠΑΝΕΣ (μισθοί, συντάξεις κ.λπ.)");
-                System.out.println("3. Αλλαγές ανά ΥΠΟΥΡΓΕΙΟ (έσοδα/έξοδα υπουργείου)");
-                System.out.println("0. Τέλος σεναρίου & εμφάνιση αποτελεσμάτων");
-                System.out.print("Επιλογή: ");
+        // Το σενάριο αρχίζει να εκτελείται
 
-                int choice = scanner.nextInt(); // Σε κάθε επανάληψη ο χρήστης επιλέγει τι είδους αλλαγή θέλει να κάνει
+        while (!done) {
+            System.out.println("\n--- Επιλέξτε τι θέλετε να αλλάξετε ---");
+            System.out.println("1. Αλλαγές στα ΕΣΟΔΑ (φόροι, εισφορές κ.λπ.)");
+            System.out.println("2. Αλλαγές στις ΔΑΠΑΝΕΣ (μισθοί, συντάξεις κ.λπ.)");
+            System.out.println("3. Αλλαγές ανά ΥΠΟΥΡΓΕΙΟ (έσοδα/έξοδα υπουργείου)");
+            System.out.println("0. Τέλος σεναρίου & εμφάνιση αποτελεσμάτων");
+            System.out.print("Επιλογή: ");
 
-                switch (choice) {
-                    case 1:
-                        scenarioRevenue(scanner); // Χρησιμοποιείται η μέθοδος που έχει γραφεί ήδη παραπάνω
-                        break;
-                    case 2:
-                        scenarioExpenditure(scanner); // Το ίδιο και εδώ
-                        break;
-                    case 3:
-                        scenarioMinistries(scanner); // Το ίδιο και εδώ
-                        break;
-                    case 0:
-                        done = true;
-                        break;
-                    default:
-                        System.out.println("Μη έγκυρη επιλογή.");
-                }
-            }
+            int choice = scanner.nextInt(); // Σε κάθε επανάληψη ο χρήστης επιλέγει τι είδους αλλαγή θέλει να κάνει
 
-            // Τιμές μετά το σενάριο
-            double finalRevenue = budget.getRevenue();
-            double finalExpenses = budget.getExpenses();
-            double finalBalance = finalRevenue - finalExpenses;
-
-            // Σύνοψη αποτελεσμάτων
-            System.out.println("\n===== ΠΕΡΙΛΗΨΗ ΣΕΝΑΡΙΟΥ ΤΑΥΤΟΧΡΟΝΩΝ ΑΛΛΑΓΩΝ =====");
-            System.out.println("Αρχικά έσοδα : " + initialRevenue);
-            System.out.println("Αρχικά έξοδα : " + initialExpenses);
-            System.out.println("Αρχικό ισοζύγιο : " + initialBalance);
-            System.out.println("----------------------------------------");
-            System.out.println("Τελικά έσοδα : " + finalRevenue);
-            System.out.println("Τελικά έξοδα : " + finalExpenses);
-            System.out.println("Τελικό ισοζύγιο : " + finalBalance);
-            System.out.println("----------------------------------------");
-            System.out.println("Μεταβολή ισοζυγίου : " + (finalBalance - initialBalance));
-        }
-        private void showTop3Revenue(Ministry[] ministries) {
-            Ministry[] sorted = Arrays.copyOf(ministries, ministries.length);
-            Arrays.sort(sorted, (a, b) -> Double.compare(b.getRevenue(), a.getRevenue())); 
-            System.out.println("\n===== TOP-3 Υπουργεία με τα υψηλότερα έσοδα =====");
-            for (int i = 0; i < Math.min(3, sorted.length); i++) {
-                System.out.println(sorted[i].getName() + " → " + sorted[i].getRevenue());
+            switch (choice) {
+                case 1:
+                    scenarioRevenue(scanner); // Χρησιμοποιείται η μέθοδος που έχει γραφεί ήδη παραπάνω
+                    break;
+                case 2:
+                    scenarioExpenditure(scanner); // Το ίδιο και εδώ
+                    break;
+                case 3:
+                    scenarioMinistries(scanner); // Το ίδιο και εδώ
+                    break;
+                case 0:
+                    done = true;
+                    break;
+                default:
+                    System.out.println("Μη έγκυρη επιλογή.");
             }
         }
+
+        // Τιμές μετά το σενάριο
+        double finalRevenue = budget.getRevenue();
+        double finalExpenses = budget.getExpenses();
+        double finalBalance = finalRevenue - finalExpenses;
+
+        // Σύνοψη αποτελεσμάτων
+        System.out.println("\n===== ΠΕΡΙΛΗΨΗ ΣΕΝΑΡΙΟΥ ΤΑΥΤΟΧΡΟΝΩΝ ΑΛΛΑΓΩΝ =====");
+        System.out.println("Αρχικά έσοδα : " + initialRevenue);
+        System.out.println("Αρχικά έξοδα : " + initialExpenses);
+        System.out.println("Αρχικό ισοζύγιο : " + initialBalance);
+        System.out.println("----------------------------------------");
+        System.out.println("Τελικά έσοδα : " + finalRevenue);
+        System.out.println("Τελικά έξοδα : " + finalExpenses);
+        System.out.println("Τελικό ισοζύγιο : " + finalBalance);
+        System.out.println("----------------------------------------");
+        System.out.println("Μεταβολή ισοζυγίου : " + (finalBalance - initialBalance));
+    }
         
-        private void showTop3Expenses(Ministry[] ministries) {
-            Ministry[] sorted = Arrays.copyOf(ministries, ministries.length);
-            Arrays.sort(sorted, (a, b) -> Double.compare(b.getExpenses(), a.getExpenses()));
-            System.out.println("\n===== TOP-3 Υπουργεία με τα υψηλότερα έξοδα =====");
-            for (int i = 0; i < Math.min(3, sorted.length); i++) {
-                System.out.println(sorted[i].getName() + " → " + sorted[i].getExpenses());
-            }
+    private void showTop3Revenue(Ministry[] ministries) {
+        Ministry[] sorted = Arrays.copyOf(ministries, ministries.length);
+        Arrays.sort(sorted, (a, b) -> Double.compare(b.getRevenue(), a.getRevenue())); 
+        System.out.println("\n===== TOP-3 Υπουργεία με τα υψηλότερα έσοδα =====");
+            
+        for (int i = 0; i < Math.min(3, sorted.length); i++) {
+            System.out.println(sorted[i].getName() + " → " + sorted[i].getRevenue());
         }
+    }
+        
+    private void showTop3Expenses(Ministry[] ministries) {
+        Ministry[] sorted = Arrays.copyOf(ministries, ministries.length);
+        Arrays.sort(sorted, (a, b) -> Double.compare(b.getExpenses(), a.getExpenses()));
+        System.out.println("\n===== TOP-3 Υπουργεία με τα υψηλότερα έξοδα =====");
+        
+        for (int i = 0; i < Math.min(3, sorted.length); i++) {
+            System.out.println(sorted[i].getName() + " → " + sorted[i].getExpenses());
+        }
+    }
+    
 }
