@@ -1,43 +1,43 @@
 public class Budget {
     //ΕΣΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
-    public double totalRevenue = 1304827000000.0; // Σύνολο Εσόδων
-    public double taxes = 62055000000.0;              //Φόροι
-    public double socialContributions = 60000000.0;   //Κοινωνικές εισφορές
-    public double transfers = 8131000000.0;           //Μεταβιβάσεις
-    public double salesGoodsServices = 2405000000.0;  //Πωλήσεις αγαθών & υπηρεσιών
-    public double otherCurrentRevenue = 2775000000.0; //Λοιπά τρέχοντα έσοδα
+    private double totalRevenue = 1304827000000.0; // Σύνολο Εσόδων
+    private double taxes = 62055000000.0;              //Φόροι
+    private double socialContributions = 60000000.0;   //Κοινωνικές εισφορές
+    private double transfers = 8131000000.0;           //Μεταβιβάσεις
+    private double salesGoodsServices = 2405000000.0;  //Πωλήσεις αγαθών & υπηρεσιών
+    private double otherCurrentRevenue = 2775000000.0; //Λοιπά τρέχοντα έσοδα
 
-    public double fixedAssetsRevenue = 37000000.0;    //Πάγια περιουσιακά στοιχεία
-    public double debtSecuritiesRevenue = 11000000.0; //Χρεωστικοί τίτλοι
-    public double loansRevenue = 20000000.0;          //Δάνεια
-    public double equityShares = 467000000.0;         //Συμμετοχικοί τίτλοι & μερίδια
-    public double depositsLiabilities = 66000000.0;   //Υποχρεώσεις από νόμισμα/καταθέσεις
-    public double debtSecuritiesLiabilities = 25973000000.0; //Χρεωστικοί τίτλοι
-    public double loansLiabilities = 1202027000000.0; //Δάνεια
-    public double financialDerivatives = 800000000.0; //Παράγωγα
+    private double fixedAssetsRevenue = 37000000.0;    //Πάγια περιουσιακά στοιχεία
+    private double debtSecuritiesRevenue = 11000000.0; //Χρεωστικοί τίτλοι
+    private double loansRevenue = 20000000.0;          //Δάνεια
+    private double equityShares = 467000000.0;         //Συμμετοχικοί τίτλοι & μερίδια
+    private double depositsLiabilities = 66000000.0;   //Υποχρεώσεις από νόμισμα/καταθέσεις
+    private double debtSecuritiesLiabilities = 25973000000.0; //Χρεωστικοί τίτλοι
+    private double loansLiabilities = 1202027000000.0; //Δάνεια
+    private double financialDerivatives = 800000000.0; //Παράγωγα
 
     //ΕΞΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
-    public double totalExpenditure = 1307907506000.0;       //Σύνολο εξόδων
-    public double employeeCompensation = 14889199000.0;     //Παροχές σε εργαζομένους
-    public double socialBenefits = 425136000.0;             //Κοινωνικές παροχές
-    public double transfersExpenses = 34741365000.0;        //Μεταβιβάσεις
-    public double goodsServicesPurchases = 2039542000.0;    //Αγορές αγαθών και υπηρεσιών
-    public double subsidies = 80630000.0;                   //Επιδοτήσεις
-    public double interestPayments = 7701101000.0;          //Τόκοι 
-    public double otherExpenses = 101553000.0;              //Λοιπές δαπάνες
-    public double allocatedCredits = 17283053000.0;         //Πιστώσεις υπό κατανομή
-    public double fixedAssetsExpenditure = 2609600000.0;    //Πάγια περιουσιακά στοιχεία
-    public double valuables = 85000.0;                      //Τιμαλφή
-    public double loansExpenses = 3741000000.0;             //Δάνεια
-    public double equitySharesExpenses = 1755112000.0;      //Συμμετοχικοί τίτλοι/μερίδια
-    public double debtSecuritiesExpenses = 19375000000.0;   //Χρεωστικοί τίτλοι
-    public double loansExpenses54 = 1203165130000.0;        //Δάνεια
+    private double totalExpenditure = 1307907506000.0;       //Σύνολο εξόδων
+    private double employeeCompensation = 14889199000.0;     //Παροχές σε εργαζομένους
+    private double socialBenefits = 425136000.0;             //Κοινωνικές παροχές
+    private double transfersExpenses = 34741365000.0;        //Μεταβιβάσεις
+    private double goodsServicesPurchases = 2039542000.0;    //Αγορές αγαθών και υπηρεσιών
+    private double subsidies = 80630000.0;                   //Επιδοτήσεις
+    private double interestPayments = 7701101000.0;          //Τόκοι 
+    private double otherExpenses = 101553000.0;              //Λοιπές δαπάνες
+    private double allocatedCredits = 17283053000.0;         //Πιστώσεις υπό κατανομή
+    private double fixedAssetsExpenditure = 2609600000.0;    //Πάγια περιουσιακά στοιχεία
+    private double valuables = 85000.0;                      //Τιμαλφή
+    private double loansExpenses = 3741000000.0;             //Δάνεια
+    private double equitySharesExpenses = 1755112000.0;      //Συμμετοχικοί τίτλοι/μερίδια
+    private double debtSecuritiesExpenses = 19375000000.0;   //Χρεωστικοί τίτλοι
+    private double loansExpenses54 = 1203165130000.0;        //Δάνεια
     
     //ΠΙΝΑΚΑΣ ΜΕ ΥΠΟΥΡΓΕΙΑ
     public Ministry[] ministries;
 
     // ΑΡΧΙΚΟ ΙΣΟΖΥΓΙΟ
-    public double result = -3080506000.0; //Έσοδα - Έξοδα (αρχικό - πριν τις αλλαγές)
+    private double result = -3080506000.0; //Έσοδα - Έξοδα (αρχικό - πριν τις αλλαγές)
 
     // CONSTRUCTOR : αρχικοποιεί όλα τα υπουργεία
     public Budget() {
@@ -93,7 +93,7 @@ public class Budget {
         return totalExpenditure + getMinistriesExpenses();
     }
 
-    // ΥΠΟΛΟΓΙΣΜΟς ΙΣΟΖΥΓΙΟ (έσοδα - έξοδα)
+    // ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟ (έσοδα - έξοδα)
     public double calculateBalance() {
         return getTotalRevenue() - getTotalExpenditure();
     }
