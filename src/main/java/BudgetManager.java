@@ -334,9 +334,10 @@ public class BudgetManager {
         
         // 2. Επιλογή υπουργείου
         System.out.print("Επιλέξτε υπουργείο: ");
+        if (!scanner.hasNextInt()) { scanner.next(); return; }
         int choice = scanner.nextInt() - 1;   // κάνουμε -1 για index πίνακα
 
-        if (choice < 0 || choice >= budget.ministries.length) {
+        if (choice < 0 || choice >= ministries.length) {
             System.out.println("Μη έγκυρη επιλογή.");
             return;
         }
@@ -346,17 +347,23 @@ public class BudgetManager {
         System.out.println("1. Έσοδα υπουργείου");
         System.out.println("2. Έξοδα υπουργείου");
         System.out.print("Επιλογή: ");
+        if (!scanner.hasNextInt()) { scanner.next(); return; }
         int type = scanner.nextInt();
 
         // 4. Ποσοστό μεταβολής
         System.out.print("Ποσοστό μεταβολής (%): ");
+        if (!scanner.hasNextDouble()) { scanner.next(); return; }
         double percent = scanner.nextDouble();
 
         // 5. Ανάλογα με τον τύπο, αλλάζουμε έσοδα ή έξοδα
+        Ministry m = ministries[choice];
         if (type == 1) {
-            Ministry m = budget.ministries[choice];  
             double oldVal = m.getRevenue();           
             double newVal = oldVal * (1 + percent / 100.0); 
+            if(newVal < 0) {
+                 System.out.println("Αδύνατη ενέργεια: Αρνητικά έσοδα.");
+                 return;
+            }
             m.setRevenue(newVal);        
 
             System.out.println("\n--- Αλλαγή ΕΣΟΔΩΝ ---");
@@ -366,14 +373,16 @@ public class BudgetManager {
         } else if (type == 2) {
             double oldVal = m.getExpenses();
             double newVal = oldVal * (1 + percent / 100.0);
+            if(newVal < 0) {
+                 System.out.println("Αδύνατη ενέργεια: Αρνητικά έξοδα.");
+                 return;
+            }
             m.setExpenses(newVal);
             
             System.out.println("\n--- Αλλαγή ΕΞΟΔΩΝ ---");
             System.out.println("Υπουργείο: " + m.getName());
             System.out.println("Πριν: " + oldVal + " €");
             System.out.println("Μετά: " + newVal + " €");
-        } else {
-            System.out.println("Μη έγκυρη επιλογή.");
         }
 
     }
@@ -385,13 +394,9 @@ public class BudgetManager {
         System.out.println("===== ΤΑΥΤΟΧΡΟΝΕΣ ΑΛΛΑΓΕΣ =====");
 
         // Αποθήκευση αρχικών τιμών προυπολογισμού (πριν εκτελεστεί το σενάριο)
-        double initialRevenue = budget.getRevenue();
-        double initialExpenses = budget.getExpenses();
-        double initialBalance = initialRevenue - initialExpenses;
+        double initialBalance = budget.calculateBalance();
 
         boolean done = false;
-
-        // Το σενάριο αρχίζει να εκτελείται
 
         while (!done) {
             System.out.println("\n--- Επιλέξτε τι θέλετε να αλλάξετε ---");
@@ -401,6 +406,7 @@ public class BudgetManager {
             System.out.println("0. Τέλος σεναρίου & εμφάνιση αποτελεσμάτων");
             System.out.print("Επιλογή: ");
 
+            if (!scanner.hasNextInt()) { scanner.next(); continue; }
             int choice = scanner.nextInt(); // Σε κάθε επανάληψη ο χρήστης επιλέγει τι είδους αλλαγή θέλει να κάνει
 
             switch (choice) {
@@ -422,21 +428,11 @@ public class BudgetManager {
         }
 
         // Τιμές μετά το σενάριο
-        double finalRevenue = budget.getRevenue();
-        double finalExpenses = budget.getExpenses();
-        double finalBalance = finalRevenue - finalExpenses;
-
-        // Σύνοψη αποτελεσμάτων
-        System.out.println("\n===== ΠΕΡΙΛΗΨΗ ΣΕΝΑΡΙΟΥ ΤΑΥΤΟΧΡΟΝΩΝ ΑΛΛΑΓΩΝ =====");
-        System.out.println("Αρχικά έσοδα : " + initialRevenue);
-        System.out.println("Αρχικά έξοδα : " + initialExpenses);
-        System.out.println("Αρχικό ισοζύγιο : " + initialBalance);
-        System.out.println("----------------------------------------");
-        System.out.println("Τελικά έσοδα : " + finalRevenue);
-        System.out.println("Τελικά έξοδα : " + finalExpenses);
-        System.out.println("Τελικό ισοζύγιο : " + finalBalance);
-        System.out.println("----------------------------------------");
-        System.out.println("Μεταβολή ισοζυγίου : " + (finalBalance - initialBalance));
+        double finalBalance = budget.calculateBalance();
+        System.out.println("\n===== ΠΕΡΙΛΗΨΗ =====");
+        System.out.printf("Αρχικό Ισοζύγιο: %.2f%n", initialBalance);
+        System.out.printf("Τελικό Ισοζύγιο: %.2f%n", finalBalance);
+        System.out.printf("Μεταβολή: %.2f%n", (finalBalance - initialBalance));
     }
         
     private void showTop3Revenue(Ministry[] ministries) {
