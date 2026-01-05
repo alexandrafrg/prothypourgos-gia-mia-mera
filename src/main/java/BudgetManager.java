@@ -434,25 +434,5 @@ public class BudgetManager {
         System.out.printf("Τελικό Ισοζύγιο: %.2f%n", finalBalance);
         System.out.printf("Μεταβολή: %.2f%n", (finalBalance - initialBalance));
     }
-        
-    private void showTop3Revenue(Ministry[] ministries) {
-        Ministry[] sorted = Arrays.copyOf(ministries, ministries.length);
-        Arrays.sort(sorted, (a, b) -> Double.compare(b.getRevenue(), a.getRevenue())); 
-        System.out.println("\n===== TOP-3 Υπουργεία με τα υψηλότερα έσοδα =====");
-            
-        for (int i = 0; i < Math.min(3, sorted.length); i++) {
-            System.out.println(sorted[i].getName() + " → " + sorted[i].getRevenue());
-        }
-    }
-        
-    private void showTop3Expenses(Ministry[] ministries) {
-        Ministry[] sorted = Arrays.copyOf(ministries, ministries.length);
-        Arrays.sort(sorted, (a, b) -> Double.compare(b.getExpenses(), a.getExpenses()));
-        System.out.println("\n===== TOP-3 Υπουργεία με τα υψηλότερα έξοδα =====");
-        
-        for (int i = 0; i < Math.min(3, sorted.length); i++) {
-            System.out.println(sorted[i].getName() + " → " + sorted[i].getExpenses());
-        }
-    }
 
 }
