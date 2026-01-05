@@ -97,4 +97,11 @@ public class Budget {
     public double calculateBalance() {
         return getTotalRevenue() - getTotalExpenditure();
     }
+    public double getRevenue() {
+        return getTotalRevenue();
+    }
+
+    public double getExpenses() {
+        return getTotalExpenditure();
+    }
 }
