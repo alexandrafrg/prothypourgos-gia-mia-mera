@@ -33,5 +33,9 @@ public class Ministry {
     public double getBalance() {
         return revenue - expenses;
     }
-    Ministry m = budget.ministries[choice]; 
+    
+    @Override
+    public String toString() {
+        return name;
+    } 
 }
