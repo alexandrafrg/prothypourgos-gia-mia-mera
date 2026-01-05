@@ -122,29 +122,32 @@ public class BudgetManager {
         System.out.println("\n1. Top-3 Υπουργεία με τα υψηλότερα έσοδα");
         System.out.println("2. Top-3 Υπουργεία με τα υψηλότερα έξοδα");
         System.out.print("Επιλογή: ");
-        int choice = input.nextInt();
+        
+        if (!input.hasNextInt()) {
+            input.next();
+            return;
+        }
 
         if (choice == 1) {
-            showTop3Revenue(budget.ministries);
+            showTop3(true);
         } else if (choice == 2) {
-             showTop3Expenses(budget.ministries);
-        } else {
-             System.out.println("Μη έγκυρη επιλογή.");
+             showTop3(false);
         }
 
     }
 
-    private void showTop3(String[] names, double[] values) {
-
-        double[] sorted = Arrays.copyOf(values, values.length);
-        Arrays.sort(sorted);
-
-        for (int i = sorted.length - 1; i >= sorted.length - 3; i--) {
-            double value = sorted[i];
-            int indexOriginal = findIndex(values, value);
-
-            System.out.println(names[indexOriginal] + " → " + value);
-
+    private void showTop3(boolean isRevenue) {
+        Ministry[] sorted = Arrays.copyOf(budget.ministries, budget.ministries.length);
+        
+        Arrays.sort(sorted, (a, b) -> Double.compare(
+            isRevenue ? b.getRevenue() : b.getExpenses(),
+            isRevenue ? a.getRevenue() : a.getExpenses()
+        ));
+        
+        System.out.println("\n--- TOP 3 ---");
+        for (int i = 0; i < 3 && i < sorted.length; i++) {
+            double value = isRevenue ? sorted[i].getRevenue() : sorted[i].getExpenses();
+            System.out.println((i + 1) + ". " + sorted[i].getName() + ": " + value + " €");
         }
     }
 
