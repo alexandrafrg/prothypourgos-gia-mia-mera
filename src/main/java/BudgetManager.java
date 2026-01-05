@@ -65,10 +65,9 @@ public class BudgetManager {
             System.out.println("Μη έγκυρη είσοδος.");
             return;
         }
-        double newValue = input.nextDouble();
         
         double newValue = input.nextDouble();
-
+        
         if (newValue < 0) {
             System.out.println("Το ποσό δεν μπορεί να είναι αρνητικό.");
             return;
@@ -142,7 +141,7 @@ public class BudgetManager {
     }
 
     private void showTop3(boolean isRevenue) {
-        Ministry[] sorted = Arrays.copyOf(budget.ministries, budget.ministries.length);
+        Ministry[] sorted = Arrays.copyOf(budget.getMinistries, budget.ministries.length);
         
         Arrays.sort(sorted, (a, b) -> Double.compare(
             isRevenue ? b.getRevenue() : b.getExpenses(),
@@ -228,10 +227,10 @@ public class BudgetManager {
         String label = "";
 
         switch (c) {
-            case 1: oldVal = budget.getTaxes; label = "Φόρων"; break;
-            case 2: oldVal = budget.getSocialContributions; label = "Εισφορών"; break;
-            case 3: oldVal = budget.getSalesGoodsServices; label = "Πωλήσεων"; break;
-            case 4: oldVal = budget.getOtherCurrentRevenue; label = "Λοιπών Εσόδων"; break;
+            case 1: oldVal = budget.getTaxes(); label = "Φόρων"; break;
+            case 2: oldVal = budget.getSocialContributions(); label = "Εισφορών"; break;
+            case 3: oldVal = budget.getSalesGoodsServices(); label = "Πωλήσεων"; break;
+            case 4: oldVal = budget.getOtherCurrentRevenue(); label = "Λοιπών Εσόδων"; break;
             default: System.out.println("Μη έγκυρη επιλογή."); return;
         }
 
