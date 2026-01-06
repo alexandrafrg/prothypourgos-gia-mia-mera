@@ -92,29 +92,28 @@ public class BudgetManager {
     // 4. ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ
 
     public double calculateBalance() {
-    System.out.println("\n===== ΙΣΟΖΥΓΙΟ & ΕΛΕΓΧΟΣ ΠΕΡΙΟΡΙΣΜΩΝ =====");
-    double balance = budget.calculateBalance();
+        System.out.println("\n===== ΙΣΟΖΥΓΙΟ & ΕΛΕΓΧΟΣ ΠΕΡΙΟΡΙΣΜΩΝ =====");
+        double balance = budget.calculateBalance();
 
-    System.out.printf("Έσοδα: %.2f%n", budget.getRevenue());
-    System.out.printf("Έξοδα: %.2f%n", budget.getExpenses());
-    System.out.printf("Καθαρό Ισοζύγιο: %.2f%n", balance);
+        System.out.printf("Έσοδα: %.2f%n", budget.getRevenue());
+        System.out.printf("Έξοδα: %.2f%n", budget.getExpenses());
+        System.out.printf("Καθαρό Ισοζύγιο: %.2f%n", balance);
 
-    //ΕΛΕΓΧΟΣ 
-    if (balance < 0) {
-        System.out.println("ΚΑΤΑΣΤΑΣΗ: ΕΛΛΕΙΜΜΑ");
-        // Έλεγχος αν το έλλειμμα ξεπερνά το 3% των εσόδων 
-        if (Math.abs(balance) > (budget.getRevenue() * 0.03)) {
-            System.out.println("ΠΡΟΣΟΧΗ: Το έλλειμμα υπερβαίνει τα όρια ασφαλείας!");
-            System.out.println("Προτείνεται μείωση δαπανών στα Υπουργεία.");
+        //ΕΛΕΓΧΟΣ 
+        if (balance < 0) {
+            System.out.println("ΚΑΤΑΣΤΑΣΗ: ΕΛΛΕΙΜΜΑ");
+            // Έλεγχος αν το έλλειμμα ξεπερνά το 3% των εσόδων 
+            if (Math.abs(balance) > (budget.getRevenue() * 0.03)) {
+                System.out.println("ΠΡΟΣΟΧΗ: Το έλλειμμα υπερβαίνει τα όρια ασφαλείας!");
+                System.out.println("Προτείνεται μείωση δαπανών στα Υπουργεία.");
+            }
+        } else if (balance > 0) {
+            System.out.println("ΚΑΤΑΣΤΑΣΗ: ΠΛΕΟΝΑΣΜΑ");
+        } else {
+            System.out.println("ΚΑΤΑΣΤΑΣΗ: ΙΣΟΣΚΕΛΙΣΜΕΝΟΣ");
         }
-    } else if (balance > 0) {
-        System.out.println("ΚΑΤΑΣΤΑΣΗ: ΠΛΕΟΝΑΣΜΑ");
-    } else {
-        System.out.println("ΚΑΤΑΣΤΑΣΗ: ΙΣΟΣΚΕΛΙΣΜΕΝΟΣ");
+        return balance;
     }
-
-    return balance;
-}
 
 
     // 5. ΑΝΑΛΥΣΗ ΕΣΟΔΩΝ/ΕΞΟΔΩΝ ΑΝΑ ΥΠΟΥΡΓΕΙΟ
