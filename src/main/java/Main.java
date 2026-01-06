@@ -17,7 +17,7 @@ public class Main {
             printMenu(); // Κλήση της μεθόδου εκτύπωσης μενού
  
             while (!input.hasNextInt()) {
-                System.out.println("Σφάλμα: Παρακαλώ εισάγετε έναν αριθμό από 0 έως 7.");
+                System.out.println("Σφάλμα: Παρακαλώ εισάγετε έναν αριθμό από 0 έως 8.");
                 System.out.print("Επιλογή: ");
                 input.next(); // "Καθαρίζουμε" την λανθασμένη είσοδο από τη μνήμη
             }
@@ -47,11 +47,14 @@ public class Main {
                 case 7:
                     manager.executeScenario(input);
                     break;
+                case 8:
+                    manager.showDetailedAnalysis(input);
+                    break;
                 case 0:
                     System.out.println("Έξοδος από το πρόγραμμα...");
                     break;
                 default:
-                    System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά! Από 0 έως 7.");
+                    System.out.println("Μη έγκυρη επιλογή, προσπάθησε ξανά! Από 0 έως 8.");
             }
 
             System.out.println();
@@ -70,6 +73,7 @@ public class Main {
         System.out.println("5. Ανάλυση εσόδων/εξόδων ανά υπουργείο");
         System.out.println("6. Εμφάνιση Top-3 κατηγοριών");
         System.out.println("7. Εκτέλεση σεναρίων (Φόροι, Μισθοί, κλπ)");
+        System.out.println("8. Πολυεπίπεδη Ανάλυση (% και Μηνιαία)"); 
         System.out.println("0. Έξοδος");
         System.out.print("Επιλογή: ");
     }
