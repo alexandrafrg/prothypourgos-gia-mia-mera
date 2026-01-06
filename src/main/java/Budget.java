@@ -5,14 +5,31 @@ public class Budget {
     private double transfers = 8131000000.0;           //Μεταβιβάσεις
     private double salesGoodsServices = 2405000000.0;  //Πωλήσεις αγαθών & υπηρεσιών
     private double otherCurrentRevenue = 2775000000.0; //Λοιπά τρέχοντα έσοδα
+    private double fixedAssetsRevenue = 37000000.0;           // Πάγια περιουσιακά στοιχεία
+    private double debtSecuritiesRevenue = 11000000.0;        // Χρεωστικοί τίτλοι
+    private double loansRevenue = 20000000.0;                 // Δάνεια
+    private double equityShares = 467000000.0;                // Συμμετοχικοί τίτλοι
+    private double depositsLiabilities = 66000000.0;          // Υποχρεώσεις από νόμισμα
+    private double debtSecuritiesLiabilities = 25973000000.0; // Χρεωστικοί τίτλοι (Liabilities)
+    private double loansLiabilities = 120202700000.0;         // Δάνεια (Liabilities)
+    private double financialDerivatives = 80000000.0;         // Παράγωγα
 
     //ΕΞΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
-    private double employeeCompensation = 14889199000.0;     //Παροχές σε εργαζομένους
-    private double socialBenefits = 425136000.0;             //Κοινωνικές παροχές
-    private double transfersExpenses = 34741365000.0;        //Μεταβιβάσεις
-    private double goodsServicesPurchases = 2039542000.0;    //Αγορές αγαθών και υπηρεσιών
-    private double subsidies = 80630000.0;                   //Επιδοτήσεις
-    private double allocatedCredits = 17283053000.0;         //Πιστώσεις υπό κατανομή
+    private double employeeCompensation = 14889199000.0;      //Παροχές σε εργαζομένους
+    private double socialBenefits = 425136000.0;              //Κοινωνικές παροχές
+    private double transfersExpenses = 34741365000.0;         //Μεταβιβάσεις
+    private double goodsServicesPurchases = 2039542000.0;     //Αγορές αγαθών και υπηρεσιών
+    private double subsidies = 80630000.0;                    //Επιδοτήσεις
+    private double allocatedCredits = 17283053000.0;          //Πιστώσεις υπό κατανομή
+    private double interestPayments = 7701101000.0;           // Τόκοι
+    private double otherExpenses = 101553000.0;               // Λοιπές δαπάνες
+    private double fixedAssetsExpenditure = 2609600000.0;     // Πάγια περιουσιακά (Έξοδα)
+    private double valuables = 85000.0;                       // Τιμαλφή
+    private double loansExpenses = 3741000000.0;              // Δάνεια (Έξοδα)
+    private double equitySharesExpenses = 1755112000.0;        //Συμμετοχικοί τίτλοι/μερίδια
+    private double debtSecuritiesExpenses = 19375000000.0;     //Χρεωστικοί τίτλοι
+
+
     
     //ΠΙΝΑΚΑΣ ΜΕ ΥΠΟΥΡΓΕΙΑ
     private Ministry[] ministries;
