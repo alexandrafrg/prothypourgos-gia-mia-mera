@@ -449,4 +449,103 @@ public class BudgetManager {
         System.out.printf("Μεταβολή: %.2f%n", (finalBalance - initialBalance));
     }
 
+
+    // 8. ΠΟΛΥΕΠΙΠΕΔΗ ΑΝΑΛΥΣΗ (% και Μηνιαία)
+    public void showDetailedAnalysis(Scanner scanner) {
+        System.out.println("\n===== ΠΟΛΥΕΠΙΠΕΔΗ ΑΝΑΛΥΣΗ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ =====");
+        System.out.println("1. Ανάλυση Δομής Εσόδων");
+        System.out.println("2. Ανάλυση Δομής Εξόδων");
+        System.out.print("Επιλογή: ");
+
+        if (!scanner.hasNextInt()) {
+            scanner.next();
+            System.out.println("Μη έγκυρη είσοδος.");
+            return;
+        }
+        int choice = scanner.nextInt();
+
+        java.util.ArrayList<CategoryItem> items = new java.util.ArrayList<>();
+        double total = 0;
+
+        if (choice == 1) {
+            // --- ΑΝΑΛΥΣΗ ΕΣΟΔΩΝ ---
+            total = budget.getRevenue(); // Παίρνει το νέο σωστό σύνολο
+
+            // Έσοδα
+            items.add(new CategoryItem("Φόροι", budget.getTaxes()));
+            items.add(new CategoryItem("Κοινωνικές Εισφορές", budget.getSocialContributions()));
+            items.add(new CategoryItem("Μεταβιβάσεις (Έσοδα)", budget.getTransfers()));
+            items.add(new CategoryItem("Πωλήσεις Αγαθών/Υπηρ.", budget.getSalesGoodsServices()));
+            items.add(new CategoryItem("Λοιπά Τρέχοντα Έσοδα", budget.getOtherCurrentRevenue()));
+            items.add(new CategoryItem("Πάγια Περιουσιακά", budget.getFixedAssetsRevenue()));
+            items.add(new CategoryItem("Χρεωστικοί Τίτλοι (Έσοδα)", budget.getDebtSecuritiesRevenue()));
+            items.add(new CategoryItem("Δάνεια (Έσοδα)", budget.getLoansRevenue()));
+            items.add(new CategoryItem("Συμμετοχικοί Τίτλοι", budget.getEquityShares()));
+            items.add(new CategoryItem("Υποχρεώσεις (Νόμισμα)", budget.getDepositsLiabilities()));
+            items.add(new CategoryItem("Χρεωστικοί Τίτλοι (Liab.)", budget.getDebtSecuritiesLiabilities()));
+            items.add(new CategoryItem("Δάνεια (Liab.)", budget.getLoansLiabilities()));
+            items.add(new CategoryItem("Παράγωγα", budget.getFinancialDerivatives()));
+
+            // Έσοδα από Υπουργεία
+            items.add(new CategoryItem("Έσοδα Υπουργείων", budget.getMinistriesRevenue()));
+
+            System.out.println("\n--- ΚΑΤΑΝΟΜΗ ΕΣΟΔΩΝ (%) ---");
+
+        } else if (choice == 2) {
+            // --- ΑΝΑΛΥΣΗ ΕΞΟΔΩΝ ---
+            total = budget.getExpenses(); 
+
+            // Έξοδα
+            items.add(new CategoryItem("Μισθοί & Παροχές", budget.getEmployeeCompensation()));
+            items.add(new CategoryItem("Κοινωνικές Παροχές", budget.getSocialBenefits()));
+            items.add(new CategoryItem("Μεταβιβάσεις (Έξοδα)", budget.getTransfersExpenses()));
+            items.add(new CategoryItem("Αγορές Αγαθών/Υπηρ.", budget.getGoodsServicesPurchases()));
+            items.add(new CategoryItem("Επιδοτήσεις", budget.getSubsidies()));
+            items.add(new CategoryItem("Πιστώσεις υπό κατανομή", budget.getAllocatedCredits()));
+            items.add(new CategoryItem("Τόκοι (Εξυπηρέτηση Χρέους)", budget.getInterestPayments()));
+            items.add(new CategoryItem("Λοιπές Δαπάνες", budget.getOtherExpenses()));
+            items.add(new CategoryItem("Πάγια Περιουσιακά (Έξοδα)", budget.getFixedAssetsExpenditure()));
+            items.add(new CategoryItem("Τιμαλφή", budget.getValuables()));
+            items.add(new CategoryItem("Δάνεια (Έξοδα)", budget.getLoansExpenses()));
+            items.add(new CategoryItem("Συμμετοχικοί Τίτλοι (Έξοδα)", budget.getEquitySharesExpenses()));
+            items.add(new CategoryItem("Χρεωστικοί Τίτλοι (Έξοδα)", budget.getDebtSecuritiesExpenses()));
+
+            // Έξοδα από Υπουργεία
+            items.add(new CategoryItem("Λειτουργικά Υπουργείων", budget.getMinistriesExpenses()));
+
+            System.out.println("\n--- ΚΑΤΑΝΟΜΗ ΕΞΟΔΩΝ (%) ---");
+
+        } else {
+            System.out.println("Μη έγκυρη επιλογή.");
+            return;
+        }
+
+        // Ταξινόμηση (από το μεγαλύτερο στο μικρότερο)
+        items.sort((a, b) -> Double.compare(b.amount, a.amount));
+
+        // Εκτύπωση Πίνακα
+        System.out.printf("%-35s | %-15s | %-10s | %-15s%n", "ΚΑΤΗΓΟΡΙΑ", "ΠΟΣΟ (€)", "ΠΟΣΟΣΤΟ", "ΜΗΝΙΑΙΟ (Εκτ.)");
+        System.out.println("---------------------------------------------------------------------------------------");
+
+        for (CategoryItem item : items) {
+            double percent = (total == 0) ? 0 : (item.amount / total) * 100.0;
+            double monthly = item.amount / 12.0;
+            System.out.printf("%-35s | %,15.0f | %6.2f%%   | %,15.0f%n", 
+                item.name, item.amount, percent, monthly);
+        }
+        
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.printf("%-35s | %,15.0f | %6.2f%%%n", "ΣΥΝΟΛΟ", total, 100.0);
+    }
+
+    // Βοηθητική κλάση για την αποθήκευση δεδομένων 
+    private class CategoryItem {
+        String name;
+        double amount;
+        public CategoryItem(String name, double amount) {
+            this.name = name;
+            this.amount = amount;
+        }
+    }
+
 }
