@@ -75,6 +75,33 @@ public class Budget {
     public double getOtherCurrentRevenue() { return otherCurrentRevenue; }
     public void setOtherCurrentRevenue(double val) { this.otherCurrentRevenue = val; }
 
+    public double getTransfers() { return transfers; }
+    public void setTransfers(double val) { this.transfers = val; }
+
+    public double getFixedAssetsRevenue() { return fixedAssetsRevenue; }
+    public void setFixedAssetsRevenue(double val) { this.fixedAssetsRevenue = val; }
+
+    public double getDebtSecuritiesRevenue() { return debtSecuritiesRevenue; }
+    public void setDebtSecuritiesRevenue(double val) { this.debtSecuritiesRevenue = val; }
+
+    public double getLoansRevenue() { return loansRevenue; }
+    public void setLoansRevenue(double val) { this.loansRevenue = val; }
+
+    public double getEquityShares() { return equityShares; }
+    public void setEquityShares(double val) { this.equityShares = val; }
+
+    public double getDepositsLiabilities() { return depositsLiabilities; }
+    public void setDepositsLiabilities(double val) { this.depositsLiabilities = val; }
+
+    public double getDebtSecuritiesLiabilities() { return debtSecuritiesLiabilities; }
+    public void setDebtSecuritiesLiabilities(double val) { this.debtSecuritiesLiabilities = val; }
+
+    public double getLoansLiabilities() { return loansLiabilities; }
+    public void setLoansLiabilities(double val) { this.loansLiabilities = val; }
+
+    public double getFinancialDerivatives() { return financialDerivatives; }
+    public void setFinancialDerivatives(double val) { this.financialDerivatives = val; }
+
     // Getters/Setters για Έξοδα
     public double getEmployeeCompensation() { return employeeCompensation; }
     public void setEmployeeCompensation(double val) { this.employeeCompensation = val; }
@@ -93,7 +120,29 @@ public class Budget {
 
     public double getAllocatedCredits() { return allocatedCredits; }
     public void setAllocatedCredits(double val) { this.allocatedCredits = val; }
+
+    public double getInterestPayments() { return interestPayments; }
+    public void setInterestPayments(double val) { this.interestPayments = val; }
+
+    public double getOtherExpenses() { return otherExpenses; }
+    public void setOtherExpenses(double val) { this.otherExpenses = val; }
+
+    public double getFixedAssetsExpenditure() { return fixedAssetsExpenditure; }
+    public void setFixedAssetsExpenditure(double val) { this.fixedAssetsExpenditure = val; }
+
+    public double getValuables() { return valuables; }
+    public void setValuables(double val) { this.valuables = val; }
+
+    public double getLoansExpenses() { return loansExpenses; }
+    public void setLoansExpenses(double val) { this.loansExpenses = val; }
+
+    public double getEquitySharesExpenses() { return equitySharesExpenses; }
+    public void setEquitySharesExpenses(double val) { this.equitySharesExpenses = val; }
+
+    public double getDebtSecuritiesExpenses() { return debtSecuritiesExpenses; }
+    public void setDebtSecuritiesExpenses(double val) { this.debtSecuritiesExpenses = val; }
     
+
     // ΥΠΟΛΟΓΙΣΜΟΣ ΣΥΝΟΛΙΚΩΝ ΕΣΟΔΩΝ ΤΩΝ ΥΠΟΥΡΓΕΙΩΝ
     public double getMinistriesRevenue() {
         double sum = 0;
@@ -114,16 +163,41 @@ public class Budget {
     
     // Υπολογισμός Εσόδων: Κατηγορίες Εσόδων + Έσοδα Υπουργείων
     public double getRevenue() {
-        return taxes + socialContributions + transfers + salesGoodsServices + otherCurrentRevenue 
-            + getMinistriesRevenue();
+        return taxes 
+             + socialContributions 
+             + transfers 
+             + salesGoodsServices 
+             + otherCurrentRevenue 
+             + fixedAssetsRevenue 
+             + debtSecuritiesRevenue 
+             + loansRevenue 
+             + equityShares 
+             + depositsLiabilities 
+             + debtSecuritiesLiabilities 
+             + loansLiabilities 
+             + financialDerivatives
+             + getMinistriesRevenue();
     }
 
     // Υπολογισμός Εξόδων: Κατηγορίες Εξόδων + Έξοδα Υπουργείων
     public double getExpenses() {
-        return employeeCompensation + socialBenefits + transfersExpenses + goodsServicesPurchases 
-            + subsidies + allocatedCredits + getMinistriesExpenses();
+        return employeeCompensation 
+             + socialBenefits 
+             + transfersExpenses 
+             + goodsServicesPurchases 
+             + subsidies 
+             + allocatedCredits 
+             + interestPayments 
+             + otherExpenses 
+             + fixedAssetsExpenditure 
+             + valuables 
+             + loansExpenses 
+             + equitySharesExpenses 
+             + debtSecuritiesExpenses
+             + getMinistriesExpenses();
     }
 
+    
     // ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ (έσοδα - έξοδα)
     public double calculateBalance() {
         return getRevenue() - getExpenses();
