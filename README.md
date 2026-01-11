@@ -1,15 +1,16 @@
-## Build
-
-Το project χρησιμοποιεί Maven.
-
+## 1. Οδηγίες Μεταγλώττισης
+Για να κάνετε compile τον κώδικα, βεβαιωθείτε ότι έχετε εγκατεστημένη τη **Java 21** και το **Maven**.
+Ανοίξτε ένα τερματικό στον φάκελο του project και τρέξτε την εντολή:
 ```bash
-mvn clean compile
+mvn clean package
 
+## 2. Οδηγίες Εκτέλεσης
+Αφού ολοκληρωθεί η μεταγλώττιση, υπάρχουν δύο τρόποι να τρέξετε την εφαρμογή:
 
----
-
-### 3️⃣ Commit & push
+**Α. Μέσω Maven:**
 ```bash
-git add pom.xml README.md
-git commit -m "Add Maven build configuration"
-git push
+mvn exec:java
+
+**Β. Μέσω του αρχείου JAR (μετά το compile):**
+bash
+java -jar target/prothypourgos-gia-mia-mera-1.0.jar
