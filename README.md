@@ -3,7 +3,7 @@
 Ανοίξτε ένα τερματικό στον φάκελο του project και τρέξτε την εντολή:
 ```bash
 mvn clean package
-
+```
 
 ## 2. Οδηγίες Εκτέλεσης
 Αφού ολοκληρωθεί η μεταγλώττιση, υπάρχουν δύο τρόποι να τρέξετε την εφαρμογή:
@@ -11,10 +11,12 @@ mvn clean package
 **Α. Μέσω Maven:**
 ```bash
 mvn exec:java
+```
 
 **Β. Μέσω του αρχείου JAR:**
 ```bash
 java -jar target/prothypourgos-gia-mia-mera-1.0.jar
+```
 
 
 ## 3. Οδηγίες Χρήσης
@@ -49,6 +51,7 @@ java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 │           └── BudgetManagerTest.java # Unit tests (JUnit 5)
 ├── pom.xml                         # Αρχείο ρυθμίσεων Maven & Dependencies
 └── README.md                       # Η παρούσα τεχνική αναφορά
+```
 
 
 ## 5. Διάγραμμα UML
@@ -109,6 +112,7 @@ classDiagram
     Main ..> Budget : creates
     BudgetManager o-- "1" Budget : manages
     Budget "1" *-- "20" Ministry : contains
+```
 
 ### Ανάλυση Σχεδιασμού
 Η αρχιτεκτονική της εφαρμογής ακολουθεί τον εξής διαχωρισμό ευθυνών:
@@ -146,15 +150,18 @@ classDiagram
 * **Εντολή εκτέλεσης:**
 ```bash
 mvn test
+```
 
 ### Τεκμηρίωση API - JavaDoc
 Ο κώδικας είναι τεκμηριωμένος με σχόλια μορφής JavaDoc, ώστε να επιτρέπει την αυτόματη παραγωγή τεχνικής τεκμηρίωσης (HTML format).
 * **Εντολή Δημιουργίας:**
 ```bash
 mvn javadoc:javadoc
+```
 
 ### Ποιότητα Κώδικα (Code Style)
 Χρησιμοποιείται το **Maven Checkstyle Plugin** για τον έλεγχο της μορφοποίησης του κώδικα, ώστε να ακολουθεί τα πρότυπα της Sun/Oracle (`sun_checks.xml`).
 * **Εντολή ελέγχου:**
 ```bash
 mvn checkstyle:check
+```
