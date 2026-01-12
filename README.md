@@ -13,7 +13,7 @@ mvn clean package
 mvn exec:java
 
 **Β. Μέσω του αρχείου JAR:**
-bash
+```bash
 java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 
 
