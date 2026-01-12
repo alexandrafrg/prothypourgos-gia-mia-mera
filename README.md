@@ -12,7 +12,7 @@ mvn clean package
 ```bash
 mvn exec:java
 
-**Β. Μέσω του αρχείου JAR (μετά το compile):**
+**Β. Μέσω του αρχείου JAR:**
 bash
 java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 
@@ -49,3 +49,90 @@ java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 │           └── BudgetManagerTest.java # Unit tests (JUnit 5)
 ├── pom.xml                         # Αρχείο ρυθμίσεων Maven & Dependencies
 └── README.md                       # Η παρούσα τεχνική αναφορά
+
+
+## 5. Διάγραμμα UML
+Το παρακάτω διάγραμμα κλάσεων (Class Diagram) απεικονίζει τη δομή και τις συσχετίσεις των κλάσεων της εφαρμογής:
+
+```mermaid
+classDiagram
+    class Main {
+        +main(String[] args)
+        -printMenu()
+    }
+
+    class Budget {
+        -double taxes
+        -double employeeCompensation
+        -Ministry[] ministries
+        +getRevenue()
+        +getExpenses()
+        +calculateBalance()
+        +getMinistries()
+        +getMinistriesRevenue()
+        +getMinistriesExpenses()
+    }
+
+    class Ministry {
+        -String name
+        -double revenue
+        -double expenses
+        +getName()
+        +getRevenue()
+        +getExpenses()
+        +setRevenue(double)
+        +setExpenses(double)
+        +getBalance()
+        +toString()
+    }
+
+    class BudgetManager {
+        -Budget budget
+        -StringBuilder changesLog
+        +BudgetManager(Budget)
+        +displayBudget()
+        +modifyBudget(Scanner)
+        +displayChanges()
+        +calculateBalance()
+        +analyzeMinistryBudget()
+        +showTopBudgetCategories(Scanner)
+        -showTop3(boolean)
+        +executeScenario(Scanner)
+        -scenarioRevenue(Scanner)
+        -scenarioExpenditure(Scanner)
+        -scenarioMinistries(Scanner)
+        -scenarioCombined(Scanner)
+        +showDetailedAnalysis(Scanner)
+    }
+
+    Main ..> BudgetManager : uses
+    Main ..> Budget : creates
+    BudgetManager o-- "1" Budget : manages
+    Budget "1" *-- "20" Ministry : contains
+
+### Ανάλυση Σχεδιασμού
+Η αρχιτεκτονική της εφαρμογής ακολουθεί τον εξής διαχωρισμό ευθυνών:
+* **Main:** Αποτελεί το σημείο εισόδου και διαχειρίζεται το κεντρικό μενού.
+* **BudgetManager:** Περιέχει όλη την επιχειρησιακή λογική και τους αλγορίθμους επεξεργασίας των δεδομένων.
+* **Budget & Ministry:** Λειτουργούν ως Μοντέλα Δεδομένων, κρατώντας την κατάσταση του προϋπολογισμού και των επιμέρους υπουργείων.
+
+
+## 6. Δομές Δεδομένων και Αλγόριθμοι
+
+### Δομές Δεδομένων
+Για την αποθήκευση και διαχείριση των δεδομένων της εφαρμογής, επιλέχθηκαν οι εξής δομές:
+
+* **Πίνακας (Array):** Χρησιμοποιείται η δομή `Ministry[]` στην κλάση `Budget` για την αποθήκευση των 20 Υπουργείων, καθώς ο αριθμός των υπουργείων είναι προκαθορισμένος και σταθερός.
+* **ArrayList:** Χρησιμοποιείται στην κλάση `BudgetManager` (μέθοδος `showDetailedAnalysis`) για τη δυναμική δημιουργία λίστας κατηγοριών εσόδων/εξόδων, όπου το πλήθος των στοιχείων μπορεί να διαφέρει.
+* **StringBuilder:** Χρησιμοποιείται στο πεδίο `changesLog` του `BudgetManager` για την καταγραφή του ιστορικού αλλαγών.
+
+### Αλγόριθμοι
+Οι βασικοί αλγόριθμοι που υλοποιήθηκαν περιλαμβάνουν:
+
+* **Ταξινόμηση (Sorting):**
+    * Χρησιμοποιείται η μέθοδος `Arrays.sort()` για την εύρεση των Top-3 Υπουργείων και η `List.sort()` για την Πολυεπίπεδη Ανάλυση.
+    * Η σύγκριση γίνεται μέσω **Lambda Expressions** (π.χ. `(a, b) -> Double.compare(...)`), επιτρέποντας την ευέλικτη ταξινόμηση είτε βάσει εσόδων είτε βάσει εξόδων, σε φθίνουσα σειρά.
+* **Συσώρευση:**
+    * Υλοποιούνται αλγόριθμοι άθροισης μέσω επαναληπτικών βρόχων (`for-each`) για τον υπολογισμό των συνολικών εσόδων/εξόδων του προϋπολογισμού από τα επιμέρους ποσά των υπουργείων και των κατηγοριών.
+* **Επαλήθευση Περιορισμών (Validation Logic):**
+    * Στη μέθοδο `calculateBalance()`, εκτελείται αλγοριθμικός έλεγχος για το αν το έλλειμμα υπερβαίνει το 3% του ΑΕΠ (εσόδων), παράγοντας τις αντίστοιχες προειδοποιήσεις.
