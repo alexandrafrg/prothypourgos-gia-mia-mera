@@ -50,7 +50,11 @@ java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 │       └── java
 │           └── BudgetManagerTest.java    # Unit tests (JUnit 5)
 ├── pom.xml                               # Αρχείο ρυθμίσεων Maven & Dependencies
-└── README.md                             # Η παρούσα τεχνική αναφορά
+├── README.md                             # Η παρούσα τεχνική αναφορά
+└── images                                # Φάκελος εικόνων
+       ├── junit_terminal.png
+       ├── coverage_summary.png
+       └── coverage_detailed.png
 ```
 
 
