@@ -48,7 +48,9 @@ java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 │   │       └── BudgetManager.java  # Η λογική της εφαρμογής 
 │   └── test
 │       └── java
-│           └── BudgetManagerTest.java    # Unit tests (JUnit 5)
+│           ├── BudgetManagerTest.java    # Unit tests (JUnit 5)
+│           ├── MinistryTest.java
+│           └── BudgetTest.java    
 ├── pom.xml                               # Αρχείο ρυθμίσεων Maven & Dependencies
 ├── README.md                             # Η παρούσα τεχνική αναφορά
 └── images                                # Φάκελος εικόνων
