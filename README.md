@@ -151,6 +151,17 @@ classDiagram
 ```bash
 mvn test
 ```
+#### Αποτελέσματα Εκτέλεσης Tests (JUnit 5)
+Στην παρακάτω εικόνα φαίνεται η επιτυχής εκτέλεση των unit tests μέσω του Maven στο τερματικό:
+![JUnit Terminal Output](images/junit_terminal.png)
+
+#### Αναφορά Κάλυψης Κώδικα (Code Coverage Report)
+Μετά την εκτέλεση των tests, παράγεται αυτόματα αναφορά κάλυψης από το JaCoCo (διαθέσιμη στο target/site/jacoco/index.html).
+* **Συνολική Κάλυψη Project:**
+![Total coverage](images/coverage_summary.png)
+* **Αναλυτική Κάλυψη ανά Κλάση:**
+![Detailed Coverage for all classes](images/coverage_detailed.png)
+
 
 ### Τεκμηρίωση API - JavaDoc
 Ο κώδικας είναι τεκμηριωμένος με σχόλια μορφής JavaDoc, ώστε να επιτρέπει την αυτόματη παραγωγή τεχνικής τεκμηρίωσης (HTML format).
