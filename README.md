@@ -6,7 +6,7 @@ mvn clean package
 ```
 
 ## 2. Οδηγίες Εκτέλεσης
-Αφού ολοκληρωθεί η μεταγλώττιση, υπάρχουν δύο τρόποι να τρέξετε την εφαρμογή:
+Υπάρχουν δύο τρόποι να τρέξετε την εφαρμογή:
 
 **Α. Μέσω Maven:**
 ```bash
@@ -20,7 +20,7 @@ java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 
 
 ## 3. Οδηγίες Χρήσης
-Η εφαρμογή είναι ένας διαδραστικός προσομοιωτής κρατικού προϋπολογισμού ("Πρωθυπουργός για μια μέρα") που λειτουργεί μέσω της κονσόλας.
+Η εφαρμογή είναι ένας διαδραστικός προσομοιωτής του κρατικού προϋπολογισμού ("Πρωθυπουργός για μια μέρα").
 Κατά την εκκίνηση, εμφανίζεται ένα μενού επιλογών, όπου ο χρήστης πληκτρολογεί τον αριθμό της ενέργειας που επιθυμεί (0-8) και πατάει `Enter`:
 
 1. **Προβολή προϋπολογισμού:** Εμφανίζει τα συνολικά Έσοδα, Έξοδα και το τρέχον Ισοζύγιο, καθώς και μια συνοπτική λίστα των Υπουργείων.
@@ -45,12 +45,18 @@ java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 │   │       ├── Main.java           # Η κλάση εκκίνησης (περιέχει το Menu)
 │   │       ├── Budget.java         # Το μοντέλο δεδομένων του Προϋπολογισμού
 │   │       ├── Ministry.java       # Το μοντέλο δεδομένων του Υπουργείου
-│   │       └── BudgetManager.java  # Η λογική της εφαρμογής (Business Logic)
+│   │       └── BudgetManager.java  # Η λογική της εφαρμογής 
 │   └── test
 │       └── java
-│           └── BudgetManagerTest.java # Unit tests (JUnit 5)
-├── pom.xml                         # Αρχείο ρυθμίσεων Maven & Dependencies
-└── README.md                       # Η παρούσα τεχνική αναφορά
+│           ├── BudgetManagerTest.java    # Unit tests (JUnit 5)
+│           ├── MinistryTest.java
+│           └── BudgetTest.java    
+├── images                                # Φάκελος εικόνων
+│   ├── junit_terminal.png
+│   ├── coverage_summary.png
+│   └── coverage_detailed.png
+├── pom.xml                               # Αρχείο ρυθμίσεων Maven & Dependencies
+└── README.md                             # Η παρούσα τεχνική αναφορά
 ```
 
 
@@ -144,13 +150,28 @@ classDiagram
 
 ## 7. Πρόσθετη Τεχνική Τεκμηρίωση
 
-### Unit Testing 
-Το project χρησιμοποιεί το **JUnit 5** για την εκτέλεση αυτοματοποιημένων ελέγχων ορθότητας.
+### Unit Testing & Code Coverage
+Το project χρησιμοποιεί το **JUnit 5** για την εκτέλεση αυτοματοποιημένων ελέγχων ορθότητας και το **JaCoCo** για την μέτρηση της κάλυψης κώδικα (Code Coverage).
 * **Σκοπός:** Επιβεβαίωση της σωστής λειτουργίας των υπολογισμών του προϋπολογισμού.
 * **Εντολή εκτέλεσης:**
 ```bash
 mvn test
 ```
+#### Αποτελέσματα Εκτέλεσης Tests (JUnit 5)
+Στην παρακάτω εικόνα φαίνεται η επιτυχής εκτέλεση των unit tests μέσω του Maven στο τερματικό:
+![JUnit Terminal Output](images/junit_terminal.png)
+
+#### Αναφορά Κάλυψης Κώδικα (Code Coverage Report)
+Μετά την εκτέλεση των tests, παράγεται αυτόματα αναφορά κάλυψης από το JaCoCo (διαθέσιμη στο target/site/jacoco/index.html).
+
+* **Συνολική Κάλυψη Project:**
+
+![Total coverage](images/coverage_summary.png)
+
+* **Αναλυτική Κάλυψη ανά Κλάση:**
+
+![Detailed Coverage for all classes](images/coverage_detailed.png)
+
 
 ### Τεκμηρίωση API - JavaDoc
 Ο κώδικας είναι τεκμηριωμένος με σχόλια μορφής JavaDoc, ώστε να επιτρέπει την αυτόματη παραγωγή τεχνικής τεκμηρίωσης (HTML format).
