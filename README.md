@@ -161,11 +161,13 @@ mvn test
 
 #### Αναφορά Κάλυψης Κώδικα (Code Coverage Report)
 Μετά την εκτέλεση των tests, παράγεται αυτόματα αναφορά κάλυψης από το JaCoCo (διαθέσιμη στο target/site/jacoco/index.html).
+
 * **Συνολική Κάλυψη Project:**
 
 ![Total coverage](images/coverage_summary.png)
 
 * **Αναλυτική Κάλυψη ανά Κλάση:**
+
 ![Detailed Coverage for all classes](images/coverage_detailed.png)
 
 
