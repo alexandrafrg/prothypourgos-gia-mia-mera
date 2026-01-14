@@ -16,7 +16,6 @@ public class Main {
        
         Scanner input = new Scanner(System.in);
 
-
         // Δημιουργία αντικειμένων
         Budget budget = new Budget();
         BudgetManager manager = new BudgetManager(budget);
