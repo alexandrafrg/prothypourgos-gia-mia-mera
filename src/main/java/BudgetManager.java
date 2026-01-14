@@ -1,16 +1,28 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+/**
+ * Διαχειρίζεται τον κρατικό προϋπολογισμό της εφαρμογής.
+ * Περιλαμβάνει λειτουργίες προβολής, τροποποίησης
+ * και ανάλυσης οικονομικών δεδομένων.
+ */
 public class BudgetManager {
 
     private Budget budget;
     private StringBuilder changesLog = new StringBuilder();
-
+    /**
+    * Δημιουργεί έναν διαχειριστή προϋπολογισμού.
+    *
+    * @param budget το αντικείμενο Budget που θα διαχειρίζεται
+    */
     public BudgetManager(Budget budget) {
         this.budget = budget;
     } 
 
     // 1. ΠΡΟΒΟΛΗ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
+    /**
+    * Εμφανίζει τον προϋπολογισμό και τα οικονομικά στοιχεία
+    * όλων των υπουργείων.
+    */
     public void displayBudget() {
         System.out.println("\n===== ΠΡΟΒΟΛΗ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ =====");
         System.out.println("Συνολικά Έσοδα: " + budget.getRevenue());
@@ -32,6 +44,11 @@ public class BudgetManager {
     }
 
     // 2. ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ ΣΕ ΥΠΟΥΡΓΕΙΟ
+    /**
+    * Τροποποιεί τα έξοδα επιλεγμένου υπουργείου.
+    *
+    * @param input ο Scanner για είσοδο δεδομένων από τον χρήστη
+    */
     public void modifyBudget(Scanner input) {
 
         System.out.println("\n===== ΕΙΣΑΓΩΓΗ ΑΛΛΑΓΗΣ =====");
@@ -90,7 +107,11 @@ public class BudgetManager {
     }
 
     // 4. ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ
-
+    /**
+    * Υπολογίζει το ισοζύγιο του προϋπολογισμού.
+    *
+    * @return το καθαρό ισοζύγιο (έσοδα - έξοδα)
+    */
     public double calculateBalance() {
         System.out.println("\n===== ΙΣΟΖΥΓΙΟ & ΕΛΕΓΧΟΣ ΠΕΡΙΟΡΙΣΜΩΝ =====");
         double balance = budget.calculateBalance();
@@ -117,6 +138,11 @@ public class BudgetManager {
 
 
     // 5. ΑΝΑΛΥΣΗ ΕΣΟΔΩΝ/ΕΞΟΔΩΝ ΑΝΑ ΥΠΟΥΡΓΕΙΟ
+    /**
+    * Πραγματοποιεί ανάλυση εσόδων και εξόδων
+    * για κάθε υπουργείο ξεχωριστά και εμφανίζει
+    * αν υπάρχει πλεόνασμα ή έλλειμμα.
+    */
     public void analyzeMinistryBudget() {
 
         System.out.println("\n===== ΑΝΑΛΥΣΗ ΑΝΑ ΥΠΟΥΡΓΕΙΟ =====");
@@ -131,6 +157,13 @@ public class BudgetManager {
     }
 
     // 6. TOP-3 ΚΑΤΗΓΟΡΙΕΣ ΕΣΟΔΩΝ/ΕΞΟΔΩΝ
+    /**
+    * Εμφανίζει τις τρεις πρώτες κατηγορίες υπουργείων
+    * με τα υψηλότερα έσοδα ή έξοδα, ανάλογα με την
+    * επιλογή του χρήστη.
+    *
+    * @param input ο Scanner για την εισαγωγή δεδομένων από τον χρήστη
+    */
     public void showTopBudgetCategories(Scanner input) {
 
         System.out.println("\n1. Top-3 Υπουργεία με τα υψηλότερα έσοδα");
@@ -172,6 +205,13 @@ public class BudgetManager {
 
 
     // 7. ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
+    /**
+    * Εκτελεί σενάρια μεταβολών στον προϋπολογισμό
+    * μέσω διαδραστικού μενού, όπως αλλαγές σε έσοδα,
+    * δαπάνες και στοιχεία υπουργείων.
+    *
+    * @param scanner ο Scanner για την εισαγωγή δεδομένων από τον χρήστη
+    */
     public void executeScenario(Scanner scanner) {
 
         //ΜΕΝΟΥ ΓΙΑ ΤΗΝ ΕΚΤΕΛΕΣΗ ΣΕΝΑΡΙΩΝ
@@ -450,6 +490,13 @@ public class BudgetManager {
 
 
     // 8. ΠΟΛΥΕΠΙΠΕΔΗ ΑΝΑΛΥΣΗ (% και Μηνιαία)
+    /**
+    * Παρουσιάζει αναλυτική κατανομή εσόδων ή εξόδων
+    * του προϋπολογισμού σε ποσοστά καθώς και
+    * εκτιμώμενα μηνιαία ποσά.
+    *
+    * @param scanner ο Scanner για την εισαγωγή δεδομένων από τον χρήστη
+    */
     public void showDetailedAnalysis(Scanner scanner) {
         System.out.println("\n===== ΠΟΛΥΕΠΙΠΕΔΗ ΑΝΑΛΥΣΗ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ =====");
         System.out.println("1. Ανάλυση Δομής Εσόδων");
