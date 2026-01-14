@@ -1,6 +1,17 @@
 import java.util.Scanner;
-
+/**
+ * Κύρια κλάση εκκίνησης της εφαρμογής "Πρωθυπουργός για μια μέρα".
+ * Περιλαμβάνει το κύριο μενού και εκτελεί τις λειτουργίες
+ * μέσω του BudgetManager.
+ */
 public class Main {
+    /**
+     * Κύρια μέθοδος εκκίνησης της εφαρμογής.
+     * Δημιουργεί αντικείμενα Budget και BudgetManager,
+     * εμφανίζει το μενού και δέχεται επιλογές χρήστη.
+     *
+     * @param args τα επιχειρήματα γραμμής εντολών (δεν χρησιμοποιούνται)
+     */
     public static void main(String[] args) {
        
         Scanner input = new Scanner(System.in);
@@ -63,7 +74,9 @@ public class Main {
 
         input.close();
     }
-
+    /**
+     * Εκτυπώνει το κύριο μενού επιλογών της εφαρμογής.
+     */
     private static void printMenu() {
         System.out.println("===== ΠΡΩΘΥΠΟΥΡΓΟΣ ΓΙΑ ΜΙΑ ΜΕΡΑ =====");
         System.out.println("1. Προβολή προϋπολογισμού");

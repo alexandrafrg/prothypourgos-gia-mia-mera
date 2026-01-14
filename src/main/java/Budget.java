@@ -1,3 +1,13 @@
+/**
+ * Αναπαριστά τον κρατικό προϋπολογισμό της χώρας.
+ * Περιλαμβάνει όλες τις κατηγορίες εσόδων και εξόδων,
+ * καθώς και τα υπουργεία με τα δικά τους έσοδα και έξοδα.
+ * 
+ * Παρέχει μεθόδους για:
+ * - Ανάκτηση και ενημέρωση εσόδων/εξόδων
+ * - Υπολογισμό συνολικών εσόδων και εξόδων
+ * - Υπολογισμό ισοζυγίου
+ */
 public class Budget {
     //ΕΣΟΔΑ ΠΡΟΥΠΟΛΟΓΙΣΜΟΥ
     private double taxes = 62055000000.0;              //Φόροι
@@ -35,6 +45,11 @@ public class Budget {
     private Ministry[] ministries;
 
     // CONSTRUCTOR : αρχικοποιεί όλα τα υπουργεία
+    /**
+     * Δημιουργεί ένα νέο αντικείμενο Budget.
+     * Αρχικοποιεί όλα τα υπουργεία με τα αρχικά τους
+     * έσοδα και έξοδα.
+     */
     public Budget() {
         ministries = new Ministry[] {
             new Ministry("Υπουργείο Εσωτερικών", 3449276000.0, 3830276000.0),
@@ -63,7 +78,17 @@ public class Budget {
     public Ministry[] getMinistries() { return ministries; }
     
     // Getters/Setters για Έσοδα
+    /**
+     * Επιστρέφει τα έσοδα από φόρους.
+     * 
+     * @return οι φόροι σε ευρώ
+     */
     public double getTaxes() { return taxes; }
+     /**
+     * Ορίζει τα έσοδα από φόρους.
+     * 
+     * @param taxes το νέο ποσό φόρων σε ευρώ
+     */
     public void setTaxes(double taxes) { this.taxes = taxes; }
 
     public double getSocialContributions() { return socialContributions; }
@@ -143,7 +168,12 @@ public class Budget {
     public void setDebtSecuritiesExpenses(double val) { this.debtSecuritiesExpenses = val; }
     
 
-    // ΥΠΟΛΟΓΙΣΜΟΣ ΣΥΝΟΛΙΚΩΝ ΕΣΟΔΩΝ ΤΩΝ ΥΠΟΥΡΓΕΙΩΝ
+    // ΥΠΟΛΟΓΙΣΜΟΣ ΣΥΝΟΛΙΚΩΝ ΕΣΟΔΩΝ ΤΩΝ ΥΠΟΥΡΓΕΙΩΝ\
+    /**
+     * Επιστρέφει το σύνολο εσόδων από όλα τα υπουργεία.
+     *
+     * @return άθροισμα εσόδων των υπουργείων
+     */
     public double getMinistriesRevenue() {
         double sum = 0;
         for (Ministry m : ministries) {
@@ -153,6 +183,11 @@ public class Budget {
     }
 
     // ΥΠΟΛΟΓΙΣΜΟΣ ΣΥΝΟΛΙΚΩΝ ΕΞΟΔΩΝ ΤΩΝ ΥΠΟΥΡΓΕΙΩΝ
+    /**
+     * Επιστρέφει το σύνολο εξόδων από όλα τα υπουργεία.
+     *
+     * @return άθροισμα εξόδων των υπουργείων
+     */
     public double getMinistriesExpenses() {
         double sum = 0;
         for (Ministry m : ministries) {
@@ -162,6 +197,12 @@ public class Budget {
     }
     
     // Υπολογισμός Εσόδων: Κατηγορίες Εσόδων + Έσοδα Υπουργείων
+    /**
+     * Υπολογίζει το συνολικό άθροισμα εσόδων
+     * συμπεριλαμβανομένων και των υπουργείων.
+     *
+     * @return συνολικά έσοδα σε ευρώ
+     */
     public double getRevenue() {
         return taxes 
              + socialContributions 
@@ -180,6 +221,12 @@ public class Budget {
     }
 
     // Υπολογισμός Εξόδων: Κατηγορίες Εξόδων + Έξοδα Υπουργείων
+    /**
+     * Υπολογίζει το συνολικό άθροισμα εξόδων
+     * συμπεριλαμβανομένων και των υπουργείων.
+     *
+     * @return συνολικά έξοδα σε ευρώ
+     */
     public double getExpenses() {
         return employeeCompensation 
              + socialBenefits 
@@ -199,6 +246,11 @@ public class Budget {
 
     
     // ΥΠΟΛΟΓΙΣΜΟΣ ΙΣΟΖΥΓΙΟΥ (έσοδα - έξοδα)
+    /**
+     * Υπολογίζει το ισοζύγιο του προϋπολογισμού.
+     *
+     * @return καθαρό ισοζύγιο (έσοδα - έξοδα)
+     */
     public double calculateBalance() {
         return getRevenue() - getExpenses();
     }
