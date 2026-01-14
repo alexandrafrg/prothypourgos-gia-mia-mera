@@ -193,7 +193,7 @@ public class Budget {
         for (Ministry m : ministries) {
             sum += m.getExpenses();
         }
-        return sum;
+        
     }
     
     // Υπολογισμός Εσόδων: Κατηγορίες Εσόδων + Έσοδα Υπουργείων
