@@ -1,3 +1,5 @@
+# ΠΡΩΘΥΠΟΥΡΓΟΣ ΓΙΑ ΜΙΑ ΜΕΡΑ
+
 ## 1. Οδηγίες Μεταγλώττισης
 Για να κάνετε compile τον κώδικα, βεβαιωθείτε ότι έχετε εγκατεστημένη τη **Java 21** και το **Maven**.
 Ανοίξτε ένα τερματικό στον φάκελο του project και τρέξτε την εντολή:
@@ -39,6 +41,10 @@ java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 
 ```text
 .
+├── .github
+│    └── workflows
+│        └── main.yml               # Ρυθμίσεις Continuous Integration (GitHub Actions)
+│
 ├── src
 │   ├── main
 │   │   └── java
@@ -56,6 +62,7 @@ java -jar target/prothypourgos-gia-mia-mera-1.0.jar
 │   ├── coverage_summary.png
 │   └── coverage_detailed.png
 ├── pom.xml                               # Αρχείο ρυθμίσεων Maven & Dependencies
+├── .gitignore                            # Ρυθμίσεις εξαίρεσης αρχείων Git
 └── README.md                             # Η παρούσα τεχνική αναφορά
 ```
 
@@ -186,6 +193,13 @@ mvn javadoc:javadoc
 ```bash
 mvn checkstyle:check
 ```
+
+### Continuous Integration (CI)
+Το project διαθέτει ρυθμίσεις για Continuous Integration (μέσω GitHub Actions). Σε κάθε push ή pull request στον κώδικα, εκτελείται αυτόματα ένα workflow που:
+1. Στήνει περιβάλλον με Java 21.
+2. Κάνει build την εφαρμογή.
+3. Εκτελεί όλα τα Unit Tests.
+4. Επαληθεύει ότι ο κώδικας χτίζεται σωστά χωρίς σφάλματα.
 
 
 ## 8. Άδεια Χρήσης (License)
